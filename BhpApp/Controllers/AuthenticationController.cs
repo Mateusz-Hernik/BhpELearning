@@ -42,7 +42,7 @@ namespace BhpApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);dsa
+                return BadRequest(ModelState);
             }
 
             var identity = await GetClaimsIdentity(credentials.Email, credentials.Password);
