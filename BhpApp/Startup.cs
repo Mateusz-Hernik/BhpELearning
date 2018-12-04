@@ -1,9 +1,9 @@
 using AutoMapper;
+using BhpApp.Helpers;
 using BhpApp.Models.JWT;
 using BhpApp.Utils.Authentication;
 using EntityLib;
 using EntityLib.Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -89,6 +89,12 @@ namespace BhpApp
             services.AddAuthentication().AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = tokenValidationParameters;
+            });
+
+            // api user claim policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
