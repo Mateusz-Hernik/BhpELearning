@@ -1,0 +1,70 @@
+<div class="page-title bgg">
+  <div class="container clearfix">
+    <div class="title-area pull-left">
+      <h2>Zarejestruj się <small>i dołącz do nas już teraz!</small></h2>
+    </div><!-- /.pull-right -->
+    <div class="pull-right hidden-xs">
+      <div class="bread">
+        <ol class="breadcrumb">
+          <li><a href="#">Strona Główna</a></li>
+          <li class="active">Rejestracja</li>
+        </ol>
+      </div><!-- end bread -->
+    </div><!-- /.pull-right -->
+  </div>
+</div><!-- end page-title -->
+
+<section class="section bgw">
+  <div class="container">
+    <div class="section-title-2 text-center">
+      <h2>Rejestracja</h2>
+      <hr>
+    </div><!-- end section-title -->
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <div class="contact_form">
+          <form id="contactform" class="row" [formGroup]="registerForm" (ngSubmit)="login()">
+            <div class="col-md-12">
+              <!-- Name -->
+              <input type="text" class="form-control" formControlName="name" placeholder="Imię" [ngClass]="{ 'input-error': (f.name.invalid && f.name.touched) }">
+              <div class="form-error" *ngIf="f.name.errors && f.name.touched">
+                <p *ngIf="f.name.errors?.required">Pole jest wymagane!</p>
+                <p *ngIf="f.name.errors?.minlength">Pole powinno zawierać conajmniej 2 znaki!</p>
+                <p *ngIf="f.name.errors?.maxlength">Pole może zawierać maksymalnie 50 znaków!</p>
+              </div>
+              <!-- Surname -->
+              <input type="text" class="form-control" formControlName="surname" placeholder="Nazwisko" [ngClass]="{ 'input-error': (f.surname.invalid && f.surname.touched) }">
+              <div class="form-error" *ngIf="f.surname.errors && f.surname.touched">
+                <p *ngIf="f.surname.errors?.required">Pole jest wymagane!</p>
+                <p *ngIf="f.surname.errors?.minlength">Pole powinno zawierać conajmniej 2 znaki!</p>
+                <p *ngIf="f.surname.errors?.maxlength">Pole może zawierać maksymalnie 70 znaków!</p>
+              </div>
+              <!-- Email -->
+              <input type="text" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'input-error': (f.email.invalid && f.email.touched) }">
+              <div class="form-error" *ngIf="f.email.errors && f.email.touched">
+                <p *ngIf="f.email.errors?.required">Pole jest wymagane!</p>
+                <p *ngIf="f.email.errors?.email">Pole musi zawierać poprawny adres email!</p>
+                <p *ngIf="f.email.errors?.maxlength">Pole może zawierać maksymalnie 30 znaków!</p>
+              </div>
+              <!-- Password -->
+              <input type="password" class="form-control" formControlName="password" placeholder="Hasło" [ngClass]="{ 'input-error': (f.password.invalid && f.password.touched) }">
+              <div class="form-error" *ngIf="f.password.errors && f.password.touched">
+                <p *ngIf="f.password.errors?.required">Pole jest wymagane!</p>
+                <p *ngIf="f.password.errors?.pattern">Hasło musi zawierać conajmniej 8 znaków w tym:<br>- 1 dużą literę<br>- 1 małą literę<br>- 1 cyfrę<br>- 1 znak specjalny</p>
+                <p *ngIf="f.password.errors?.maxlength">Pole może zawierać maksymalnie 20 znaków!</p>
+              </div>
+              <!-- Confirm Password -->
+              <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Powtórz Hasło" [ngClass]="{ 'input-error': (f.confirmPassword.invalid && f.confirmPassword.touched) }">
+              <div class="form-error" *ngIf="f.confirmPassword.errors && f.confirmPassword.touched">
+                <p *ngIf="f.confirmPassword.errors?.required">Pole jest wymagane!</p>
+                <p *ngIf="!f.confirmPassword.errors?.required && f.confirmPassword.errors?.compare">Hasła różnią się od siebie!</p>            
+              </div>
+              <!-- Accept form -->
+              <button type="submit" [disabled]="registerForm.invalid" value="Zarejestruj" class="btn btn-primary btn-square">Zarejestruj</button>
+            </div>
+          </form>
+        </div><!-- end regiser form -->
+      </div>
+    </div>
+  </div><!-- end comtainer -->
+</section><!-- end section-->

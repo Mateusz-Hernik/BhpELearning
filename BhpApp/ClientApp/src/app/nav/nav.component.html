@@ -1,0 +1,136 @@
+<div class="topbar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 text-left">
+        <div *ngIf="status" class="topmenu">
+          <span><i class="fa fa-lock"></i>Witaj</span>
+          <span><i class="fa fa-envelope-o"></i> <a class="nav-item" (click)="logout()">Wyloguj</a></span>
+        </div>
+        <div *ngIf="!status" class="topmenu">
+            <span><i class="fa fa-lock"></i> <a routerLinkActive="active" routerLink="/login">Zaloguj się</a></span>
+            <span><i class="fa fa-sign-in"></i> <a routerLinkActive="active" routerLink="/register">Zarejestruj się już teraz!</a></span>
+          </div><!-- end callus -->
+      </div>
+      <div class="col-md-6 col-sm-12 text-right">
+        <div class="social-icons">
+          <ul class="list-inline">
+            <li class="facebook"><a data-toggle="tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li class="google"><a data-toggle="tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li class="twitter"><a data-toggle="tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li class="linkedin"><a data-toggle="tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li class="pinterest"><a data-toggle="tooltip" data-placement="bottom" title="Pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li class="skype"><a data-toggle="tooltip" data-placement="bottom" title="Skype" href="#"><i class="fa fa-skype"></i></a></li>
+            <li class="vimeo"><a data-toggle="tooltip" data-placement="bottom" title="Vimeo" href="#"><i class="fa fa-vimeo"></i></a></li>
+            <li class="youtube"><a data-toggle="tooltip" data-placement="bottom" title="Youtube" href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div><!-- end social icons -->
+      </div><!-- end col -->
+    </div><!-- end row -->
+  </div><!-- end topbar -->
+</div><!-- end topbar -->
+<div class="logo-wrapper logo-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 text-center">
+        <div class="site-logo">
+          <a class="navbar-brand" href="index.html">
+            Szkolenia BHP<span> online</span>
+            <small>Platforma edukacyjna e-learning</small>
+          </a>
+        </div>
+      </div><!-- end col -->
+    </div><!-- end row -->
+  </div><!-- end container -->
+</div><!-- end logo-wrapper -->
+<header class="header">
+  <div class="container">
+    <nav class="navbar navbar-default yamm">
+      <div class="container-f">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a routerLinkActive="active" routerLink="/">Strona Główna</a>              
+            </li>
+            <li class="dropdown hasmenu">
+              <a href="page-about.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usługi BHP</a>
+              <ul class="dropdown-menu">
+                  <li><a href="index-1.html">Szkolenia BHP wstępne i okresowe</a></li>
+                  <li><a href="index-2.html">Opracowywanie Oceny Ryzyka Zawodowego</a></li>
+                  <li><a href="index-3.html">Przeprowadzanie okresowych kontroli warunków pracy</a></li>
+                  <li><a href="index-4.html">Dobór środków ochrony zbiorowej i indywidualnej</a></li>
+                  <li><a href="index-5.html">Nadzór nad właściwym oznakowaniem obiektów w zakresie BHP i PPOŻ.</a></li>
+                  <li><a href="index-6.html">Opracowywanie dokumentacji związanej z wypadkami przy pracy</a></li>
+                  <li><a href="index-7.html">Opracowywanie Planu bezpieczeństwa i ochrony zdrowia (BIOZ)</a></li>
+                  <li><a href="index-7.html">Outsourcing BHP</a></li>
+                </ul>
+            </li>
+            <li class="dropdown hasmenu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usługi PPOŻ</a>
+              <ul class="dropdown-menu">
+                <li><a href="course-list.html">Szkolenie PPOŻ</a></li>
+                <li><a href="course-grid.html">Opracowywanie instrukcji bezpieczeństwa przeciwpożarowego</a></li>
+                <li><a href="course-filterable-3.html">Nadzór PPOŻ</a></li>
+              </ul>
+            </li>
+            <li class="dropdown hasmenu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Szkolenia BHP On-Line</a>
+              <ul class="dropdown-menu">
+                <li><a href="page-about.html">Szkolenie okresowe BHP - Pracownik administracyjno-biurowy</a></li>
+                <li><a href="page-pricing.html">Szkolenie okresowe BHP - Pracodawca i osoby kierujące pracownikami</a></li>
+                <li><a href="page-contact.html">Szkolenie okresowe BHP - Przedstawiciel Handlowy</a></li>
+                <li><a href="page-became-member-profile.html">Szkolenie okresowe BHP - Pracownik inżynieryjno-techniczny</a></li>
+                <li><a href="page-team.html">Szkolenie okresowe BHP - Sprzedawca</a></li>
+                <li><a href="page-testimonials.html">Jak to działa</a></li>
+              </ul>
+            </li>
+            <li class="dropdown hasmenu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cennik</a>
+              <ul class="dropdown-menu">
+                <li><a href="page-about.html">Usługi BHP cennik</a></li>
+                <li><a href="page-pricing.html">Usługi PPOŻ cennik</a></li>
+                <li><a href="page-contact.html">Szkolenia BHP cennik</a></li>
+                <li><a href="page-became-member-profile.html">Szkolenia PPOŻ cennik</a></li>
+              </ul>
+            </li>
+            <li class="dropdown hasmenu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kontakt</a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">O nas</a></li>
+                <li><a href="blog-1.html">RODO</a></li>
+                <li><a href="blog-2.html">Regulamin</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="cartmenu"><a href="course-checkout.html"><i class="fa fa-shopping-bag"></i> <sup>2</sup></a></li>
+            <li class="dropdown cartmenu searchmenu hasmenu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></a>
+              <ul class="dropdown-menu show-right">
+                <li>
+                  <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                      <input type="text" class="form-control input-lg" placeholder="Szukaj kursu..." />
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary btn-lg" type="button">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav><!-- end nav -->
+  </div><!-- end container -->
+</header><!-- end header -->
