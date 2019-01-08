@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BhpApp", "BhpApp\BhpApp.csproj", "{73A2F702-BB2D-4908-AE62-F81C0F07508A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BhpApp", "BhpApp\BhpApp.csproj", "{73A2F702-BB2D-4908-AE62-F81C0F07508A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{52D8793B-EA7B-4938-9230-EF7E93FB3248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{52D8793B-EA7B-4938-9230-EF7E93FB3248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{010D3DE5-4A96-4D18-974E-6A581A298F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{010D3DE5-4A96-4D18-974E-6A581A298F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLib", "EntityLib\EntityLib.csproj", "{D436A582-24CE-4070-A965-588DB53DB92C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityLib", "EntityLib\EntityLib.csproj", "{D436A582-24CE-4070-A965-588DB53DB92C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -27,68 +27,32 @@
 			<div class="col-md-offset-2 col-md-8">
 				<div class="contact_form">
 					<form id="contactform" class="row" [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="col-md-12">              
-              <!-- Email -->
-              <input type="text" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'input-error': (f.email.invalid && f.email.touched) }">
-              <div class="form-error" *ngIf="f.email.errors && f.email.touched">
-                <p *ngIf="f.email.errors?.required">Pole jest wymagane!</p>
-                <p *ngIf="f.email.errors?.email">Pole musi zawierać poprawny adres email!</p>
-              </div>
-              <!-- Password -->
-              <input type="password" class="form-control" formControlName="password" placeholder="Hasło" [ngClass]="{ 'input-error': (f.password.invalid && f.password.touched) }">
-              <div class="form-error" *ngIf="(f.password.errors && f.password.touched) || error">
-								<p *ngIf="f.password.errors?.required">Pole jest wymagane!</p>
-								<p *ngIf="error">{{error}}</p>
-              </div>
-              <!-- Accept form -->
-              <button type="submit" [disabled]="loginForm.invalid" value="Zaloguj" class="btn btn-primary btn-square">Zaloguj</button>
-            </div>
+						<!-- Alert with errors not connected with validation -->
+						<div class="col-md-12" *ngIf="error">
+							<div class="alert alert-danger" role="alert">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span class="sr-only">Error:</span>
+								{{error}}
+							</div>
+						</div>
+						<div class="col-md-12">              
+							<!-- Email -->
+							<input type="text" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'input-error': (f.email.invalid && f.email.touched) }">
+							<div class="form-error" *ngIf="f.email.errors && f.email.touched">
+								<p *ngIf="f.email.errors?.required">Pole jest wymagane!</p>
+								<p *ngIf="f.email.errors?.email">Pole musi zawierać poprawny adres email!</p>
+							</div>
+							<!-- Password -->
+							<input type="password" class="form-control" formControlName="password" placeholder="Hasło" [ngClass]="{ 'input-error': (f.password.invalid && f.password.touched) }">
+							<div class="form-error" *ngIf="f.password.errors && f.password.touched">
+								<p *ngIf="f.password.errors?.required">Pole jest wymagane!</p>								
+							</div>
+							<!-- Accept form -->
+							<button type="submit" [disabled]="loginForm.invalid" value="Zaloguj" class="btn btn-primary btn-square">Zaloguj</button>
+						</div>
 					</form> 
 				</div>
 			</div><!-- end col -->
 		</div><!-- end row -->
 	</div><!-- end container -->
 </section><!-- end section -->
-
-<!-- <div class="row">
-	<div class="col-md-6">
-
-		<div class="card">
-			<div class="card-block">
-
-				<div *ngIf="brandNew" class="alert alert-success" role="alert">
-					<strong>All set!</strong> Please login with your account
-				</div>
-
-				<h4>Login</h4>
-
-				<form #f="ngForm" novalidate (ngSubmit)="login(f)">
-
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input id="email" type="text" required name="email" [ngModel]="credentials.email" #email="ngModel" tmFocus class="form-control"
-							placeholder="Email">
-
-						<small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">
-            Please enter a valid email
-          </small>
-
-					</div>
-
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input id="password" type="password" required name="password" class="form-control"	placeholder="Password" ngModel>
-					</div>
-
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary" [disabled]="f.invalid || isRequesting">Login</button>
-					</div>
-
-					<div *ngIf="errors" class="alert alert-danger" role="alert">
-						<strong>Oops!</strong> {{errors}}
-					</div>
-				</form>
-
-			</div>
-		</div>
-</div> -->

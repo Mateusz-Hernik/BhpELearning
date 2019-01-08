@@ -1,79 +1,78 @@
 ﻿using AutoMapper;
+using BhpApp.Controllers.Base;
 using BhpApp.Helpers;
 using BhpApp.Models.AccountViewModels;
+using DAL.Abstract;
 using EntityLib.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace BhpApp.Controllers
 {
     [Route("api/[controller]")]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly ILogger _logger;
-        private readonly IMapper _mapper;
+        private readonly IEmailSender _emailSender;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            ILogger<AccountController> logger,
-            IMapper mapper)
+            IEmailSender emailSender,
+            IMapper mapper) : base(mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
-            _mapper = mapper;
+            _emailSender = emailSender;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
+        public async Task<IActionResult> Register([FromBody]RegisterViewModel newUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = _mapper.Map<User>(model);
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var user = _mapper.Map<User>(newUser);
+            var result = await _userManager.CreateAsync(user, newUser.Password);
 
             if (!result.Succeeded)
             {
-                return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+                return BadRequest(Errors.AddErrorsToModelState(result, ModelState, newUser.Email));
             }
+
+            //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //var callbackUrl = string.Format("https://localhost:44309/api/account/confirm?userId={0}&code={1}", user.Id, code);
+
+            //await _emailSender.SendEmailAsync(
+            //    newUser.Email, 
+            //    "Potwierdzenie rejestracji w serwisie bhpelearning",
+            //    $"Proszę potwierdzić rejestrację konta w serwisie bhpelearning <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klikając w ten link</a>.");
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new OkResult();
+            return new OkObjectResult("Utworzono konto");
+
+            //return new RegisterUserResponse()
+            //{
+            //    Id = user.Id,
+            //    Succes = false
+            //};
         }
 
-        #region Helpers
-
-        private void AddErrors(IdentityResult result)
+        [HttpGet("confirm")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+            return Ok();
         }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-        }
-
-        #endregion
     }
 }

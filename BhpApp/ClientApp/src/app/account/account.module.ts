@@ -8,14 +8,17 @@ import { routing } from './account.routing';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
+  declarations: [
+    RegistrationComponent,
+    LoginComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     routing,
     SharedModule
-  ],
-  declarations: [ RegistrationComponent, LoginComponent ],
-  providers: [ UserService ]
+  ],  
+  providers: [UserService]
 })
 export class AccountModule { }

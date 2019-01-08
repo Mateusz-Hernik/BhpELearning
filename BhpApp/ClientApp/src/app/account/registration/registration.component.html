@@ -23,7 +23,16 @@
     <div class="row">
       <div class="col-md-offset-2 col-md-8">
         <div class="contact_form">
-          <form id="contactform" class="row" [formGroup]="registerForm" (ngSubmit)="login()">
+          <form id="contactform" class="row" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+            <!-- Alert with errors not connected with validation -->
+						<div class="col-md-12" *ngIf="error">
+							<div class="alert alert-danger" role="alert">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span class="sr-only">Error:</span>
+								{{error}}
+							</div>
+            </div>
+            
             <div class="col-md-12">
               <!-- Name -->
               <input type="text" class="form-control" formControlName="name" placeholder="Imię" [ngClass]="{ 'input-error': (f.name.invalid && f.name.touched) }">

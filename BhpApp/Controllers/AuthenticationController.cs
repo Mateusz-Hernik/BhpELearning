@@ -48,7 +48,7 @@ namespace BhpApp.Controllers
             var identity = await GetClaimsIdentity(credentials.Email, credentials.Password);
             if (identity == null)
             {
-                return BadRequest(Errors.AddErrorToModelState("login_failure", "Nieprawidłowa nazwa użytkownika lub hasło!", ModelState));
+                return BadRequest(Errors.AddErrorToModelState("errors", "Nieprawidłowa nazwa użytkownika lub hasło!", ModelState));
             }
 
             // Serialize and return the response

@@ -37,17 +37,12 @@ export class LoginComponent implements OnInit  {
 
     if (this.loginForm.valid) {
       this._userService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
-      .subscribe(result  => {
-        if (result === true) {
-          this._router.navigate(['/']);
-        } else {
-          // tslint:disable-next-line:max-line-length
-          this.error = result[0].error.login_failure[0] || 'Przepraszamy wystapił nieoczekiwany błąd serwera. Proszę spróbować ponownie za parę sekund';
+      .subscribe((res: boolean)  => {
+        if (res) {
+          this._router.navigate(['/dashboard']);
         }
       },
-        err => this.error = err
-      );
+      (err: string) => this.error = err);
     }
   }
-
 }

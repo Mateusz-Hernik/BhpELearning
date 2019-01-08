@@ -1,29 +1,32 @@
-import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 export abstract class BaseService {
+
+    baseUrl = '';
+    
+    protected httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    };
 
     constructor() { }
 
     protected handleError(error: any) {
-        const applicationError = error.headers.get('Application-Error');
 
-        // either applicationError in header or model error in body
-        if (applicationError) {
-            return Observable.throw(applicationError);
+        let errorMessage = '';
+
+        if(error.error.errors && error.error.errors.length > 0) {
+            errorMessage = error.error.errors[0];
+        } else if (error.error instanceof ErrorEvent) {
+          // client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // server-side error
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
-
-        let modelStateErrors = '';
-        const serverError = error.json();
-
-        if (!serverError.type) {
-            for (const key in serverError) {
-                if (serverError[key]) {
-                    modelStateErrors += serverError[key] + '\n';
-                }
-            }
-        }
-
-        modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
-        return Observable.throw(modelStateErrors || 'Server error');
+        
+        return throwError(errorMessage);
     }
 }

@@ -1,12 +1,14 @@
 using AutoMapper;
 using BhpApp.Helpers;
 using BhpApp.Models.JWT;
+using BhpApp.Utils;
 using BhpApp.Utils.Authentication;
 using EntityLib;
 using EntityLib.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -46,17 +48,24 @@ namespace BhpApp
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             // Register BhpContext
-            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
+            //services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
+            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConnHome")));
 
             // Dependency Injection
             services.AddSingleton<IJwtFactory, JwtFactory>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             // Register the services related to in the dependency injection
             // We need to tell Identity which classes to use for IdentityUser and IdentityRole
             // Token Provider service generates opaque tokens for account operations (like password reset or email change) and two-factor authentication.
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<BhpContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+                config.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<BhpContext>()
+            .AddDefaultTokenProviders();
 
             // Register and configure JwtIssuerOptions JWT
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
@@ -94,7 +103,8 @@ namespace BhpApp
             // api user claim policy
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+                options.AddPolicy("Student", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.StudentAccess));
+                options.AddPolicy("Admin", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.AdminAcess));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

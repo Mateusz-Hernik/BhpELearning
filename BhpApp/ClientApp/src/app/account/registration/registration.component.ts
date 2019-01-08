@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { UserRegistration } from '../../shared/models/user.registration.interface';
 import { UserService } from '../../shared/services/user.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -14,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class RegistrationComponent implements OnInit {
 
-  errors: string;
+  error: string;
   registerForm: FormGroup;
 
   constructor(private _userService: UserService,
@@ -72,7 +70,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerUser() {
-    this.errors = '';
+    this.error = '';
 
     if (this.registerForm.valid) {
       this._userService.register(
@@ -80,11 +78,11 @@ export class RegistrationComponent implements OnInit {
         this.registerForm.controls.surname.value,
         this.registerForm.controls.email.value,
         this.registerForm.controls.password.value)
-        .subscribe(result  => {
-          if (result) {
+        .subscribe((res: boolean)  => {
+          if (res) {
             this._router.navigate(['/login']);
           }},
-          errors =>  this.errors = errors
+          (err: string) => this.error = err
         );
     }
   }

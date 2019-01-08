@@ -25,6 +25,8 @@ namespace EntityLib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<string>("Description")
                         .HasMaxLength(500);
 
@@ -35,6 +37,8 @@ namespace EntityLib.Migrations
                     b.Property<bool>("IsVisible")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
+
+                    b.Property<DateTime>("Modified");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -52,7 +56,30 @@ namespace EntityLib.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("Expires");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("RemoteIpAddress");
+
+                    b.Property<string>("Token");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("EntityLib.Entities.User", b =>
@@ -65,6 +92,8 @@ namespace EntityLib.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -73,6 +102,8 @@ namespace EntityLib.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<DateTime>("Modified");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -120,6 +151,8 @@ namespace EntityLib.Migrations
 
                     b.Property<int>("CourseId");
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
@@ -127,6 +160,8 @@ namespace EntityLib.Migrations
                     b.Property<bool>("IsPaid")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
+
+                    b.Property<DateTime>("Modified");
 
                     b.HasKey("UserId", "CourseId");
 

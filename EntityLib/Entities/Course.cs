@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EntityLib.Shared;
+using System;
 using System.Collections.Generic;
 
 namespace EntityLib.Entities
 {
-    public class Course
+    public class Course : BaseEntity<int>
     {
-        public int Id { get; set; }
         public int Edition { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }

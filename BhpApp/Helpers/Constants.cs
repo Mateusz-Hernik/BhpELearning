@@ -11,7 +11,8 @@
 
             public static class JwtClaims
             {
-                public const string ApiAccess = "api_access";
+                public const string StudentAccess = "student_access";
+                public const string AdminAcess = "admin_access";
             }
         }
     }

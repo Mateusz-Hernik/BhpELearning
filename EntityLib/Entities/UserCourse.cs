@@ -1,6 +1,8 @@
-﻿namespace EntityLib.Entities
+﻿using EntityLib.Shared;
+
+namespace EntityLib.Entities
 {
-    public class UserCourse
+    public class UserCourse : BaseEntityWithoutId
     {
         public string UserId { get; set; }
         public User User { get; set; }
