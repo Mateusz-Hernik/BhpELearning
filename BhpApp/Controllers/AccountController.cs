@@ -2,15 +2,11 @@
 using BhpApp.Controllers.Base;
 using BhpApp.Helpers;
 using BhpApp.Models.AccountViewModels;
-using DAL.Abstract;
 using EntityLib.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace BhpApp.Controllers
@@ -60,13 +56,7 @@ namespace BhpApp.Controllers
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new OkObjectResult("Utworzono konto");
-
-            //return new RegisterUserResponse()
-            //{
-            //    Id = user.Id,
-            //    Succes = false
-            //};
+            return Ok();
         }
 
         [HttpGet("confirm")]

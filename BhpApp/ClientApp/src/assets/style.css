@@ -2105,9 +2105,9 @@ blockquote cite {
     list-style: none;
     text-align: center;
     line-height: 1;
-    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color: rgba(0, 0, 0, 0.2); */
     border-radius: 20em;
-    top: 20px;
+    /* top: 20px; */
 }
 
 .carousel-indicators li {
@@ -2134,14 +2134,14 @@ blockquote cite {
     display: none;
     position: absolute;
     max-width: 100%;
-    left: 20px;
+    /* left: 20px; */
     bottom: 20px;
-    right: 20px;
+    /* right: 20px; */
     z-index: 10;
     padding: 2em;
     color: #ffffff;
-    text-align: left;
-    background-color: rgba(0, 0, 0, 0.4);
+    /* text-align: left;
+    background-color: rgba(0, 0, 0, 0.4); */
 }
 
 @media screen and (min-width: 768px) {
@@ -2711,7 +2711,7 @@ hr.invis1 {
 .shop-desc h3 {
     padding: 10px 0 15px;
     margin: 0;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     line-height: 1.5;
     font-weight: bold;
     font-size: 18px;
@@ -4485,7 +4485,7 @@ p.dropcaps::first-letter {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.tp-caption.Agency-Title,
+/* .tp-caption.Agency-Title,
 .Agency-Title,
 h1,
 h2,
@@ -4507,7 +4507,7 @@ h6,
 .skills-style-2 h3,
 .navbar-nav > li > a {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
+} */
 
 .breadcrumb li,
 .section-title-2 .lead,

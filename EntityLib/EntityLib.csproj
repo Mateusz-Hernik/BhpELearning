@@ -16,10 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Migrations\20181216155501_Initial.Designer.cs">
-      <DependentUpon>20181216155501_Initial.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>

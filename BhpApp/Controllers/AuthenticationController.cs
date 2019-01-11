@@ -17,8 +17,7 @@ namespace BhpApp.Controllers
     public class AuthenticationController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly IJwtFactory _jwtFactory;
-        private readonly JsonSerializerSettings _serializerSettings;
+        private readonly IJwtFactory _jwtFactory;       
         private readonly JwtIssuerOptions _jwtOptions;
 
         public AuthenticationController(
@@ -29,11 +28,6 @@ namespace BhpApp.Controllers
             _userManager = userManager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
-
-            _serializerSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            };
         }
 
         // POST api/auth/login
@@ -59,8 +53,7 @@ namespace BhpApp.Controllers
                 expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
             };
 
-            var json = JsonConvert.SerializeObject(response, _serializerSettings);
-            return new OkObjectResult(json);
+            return Ok(response);
         }
 
         private async Task<ClaimsIdentity> GetClaimsIdentity(string login, string password)

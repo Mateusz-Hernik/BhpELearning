@@ -13,6 +13,8 @@ namespace EntityLib.Entities
         public DateTime EndDate { get; set; }
         public bool IsVisible { get; set; }
         public string Description { get; set; }
+        public string DescriptionWhen { get; set; }
+        public string DescriptionCert { get; set; }
         public string Photo { get; set; }
         public decimal Price { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }

@@ -1,0 +1,145 @@
+<div class="page-title bgg">
+  <div class="container clearfix">
+    <div class="title-area pull-left">
+      <h2>Szkolenie okresowe BHP <small>{{course?.name}}</small></h2>
+    </div><!-- /.pull-right -->
+    <div class="pull-right hidden-xs">
+      <div class="bread">
+        <ol class="breadcrumb">
+          <li><a routerLinkActive="active" routerLink="/">Strona Główna</a></li>
+          <li class="active">Szkolenie</li>
+        </ol>
+      </div><!-- end bread -->
+    </div><!-- /.pull-right -->
+  </div>
+</div><!-- end page-title -->
+
+<section class="section bgw">
+  <div class="container">
+      <div class="row">
+          <div id="post-content" class="col-md-8 col-sm-12 single-course">
+
+              <div class="course-single-desc clearfix">
+                  <div class="big-title">
+                      <h2 class="related-title">
+                          <span>Opis kursu</span>
+                      </h2>
+                  </div><!-- end big-title -->
+
+                  <div [innerHTML]="course?.description">
+                  </div>
+              </div><!-- end post-padding -->
+
+              <hr class="invis">
+
+              <div class="course-single-desc clearfix">
+                  <div class="big-title">
+                      <h2 class="related-title">
+                          <span>Kiedy należy przeprowadzić to szkolenie</span>
+                      </h2>
+                  </div><!-- end big-title -->
+
+                  <div [innerHTML]="course?.descriptionWhen">
+                  </div>                
+              </div><!-- end post-padding -->
+
+              <hr class="invis">
+
+              <div class="course-single-desc clearfix">
+                  <div class="big-title">
+                      <h2 class="related-title">
+                          <span>Certyfikat</span>
+                      </h2>
+                  </div><!-- end big-title -->
+
+                  <div [innerHTML]="course?.descriptionCert">
+                  </div>                
+              </div><!-- end post-padding -->
+
+              <hr class="invis">              
+
+              <div class="course-table clearfix">
+                  <div class="big-title">
+                      <h2 class="related-title">
+                          <span>Lekcje szkolenia</span>
+                      </h2>
+                  </div><!-- end big-title -->
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>Rodzaj</th>
+                              <th>Tytuł lekcji</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><i class="fa fa-play-circle"></i></td>
+                              <td><a>Introduction</a></td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-music"></i></td>
+                              <td>Lesson One - What is Photoshop</td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-play-circle"></i></td>
+                              <td>Lesson Two - How to Use Tools</td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-music"></i></td>
+                              <td>Lesson Three - Creating First Homepage</td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-play-circle"></i></td>
+                              <td>Lesson Four - Understanding Colors</td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-play-circle"></i></td>
+                              <td>Lesson Five - International Sizes</td>     
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-question-circle"></i></td>
+                              <td><a>Quiz Time - Your First Quiz</a></td>
+                          </tr>
+                      </tbody>
+                  </table>
+
+                  <a href="#" class="btn btn-primary btn-block btn-lg btn-square">Dołącz do kursu</a>
+
+              </div><!-- end course-table -->            
+          </div><!-- end col -->
+
+          <div id="sidebar" class="col-md-4 col-sm-12">
+              <div class="post-media clearfix">
+                  <img src="../../assets/images/small_course_08.jpg" alt="" class="img-responsive">
+              </div><!-- end post-media -->
+              <div class="widget custom-widget course-pricing clearfix">
+                  <div class="customwidget text-left w40">
+                      <h3 class="widget-title text-center">{{course?.price}} PLN</h3>
+                      <hr>
+
+                      <input type="submit" value="Dołącz do kursu" class="btn btn-primary btn-block" />
+    
+                      <div class="course-meta clearfix">
+                          <p class="course-category">Edycja : {{course?.edition}}</p>
+                          <hr>
+                          <p class="course-category">Kategoria : <a>BHP</a></p>
+                          <hr>
+                          <div class="rating">
+                              <p>Ocena : &nbsp;
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                          </div><!-- end rating -->
+                          <hr>
+                          <p class="course-time">Rozpoczęcie : {{course?.startDate | date:'dd-MM-yyyy'}} </p>
+                          <hr>
+                          <p class="course-time">Zakończenie : {{course?.endDate | date:'dd-MM-yyyy'}}</p>
+                      </div><!-- end meta -->
+                  </div><!-- end newsletter -->
+              </div><!-- end widget -->
+          </div><!-- end col -->
+      </div><!-- end row -->
+  </div><!-- end container -->
+</section><!-- end section -->

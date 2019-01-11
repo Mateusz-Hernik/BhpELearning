@@ -13,6 +13,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { httpInterceptorProviders } from './shared/providers/interceptors.provider';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CourseService } from './shared/services/course.service';
+import { CourseInfoComponent } from './course-info/course-info.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CourseService } from './shared/services/course.service';
     NavComponent,
     HomeComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    CourseInfoComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AccountModule,
@@ -29,7 +33,7 @@ import { CourseService } from './shared/services/course.service';
     HttpClientModule,
     routing
   ],
-  providers: [    
+  providers: [
     ConfigService,
     httpInterceptorProviders,
     CourseService

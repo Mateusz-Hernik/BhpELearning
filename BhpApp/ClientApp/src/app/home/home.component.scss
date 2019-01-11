@@ -1,0 +1,30 @@
+.carousel .item img {
+    max-height: 768px;
+    min-width: auto;
+}
+
+.carousel-caption p {
+    color: white;
+    font-size: 20px;
+}
+
+.carousel-caption h1 {
+    color: white;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 991.98px) { 
+    .carousel .item img {
+        max-height: 400px;
+        min-width: auto;
+    }
+}

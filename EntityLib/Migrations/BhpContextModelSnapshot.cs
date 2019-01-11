@@ -27,8 +27,11 @@ namespace EntityLib.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
+                    b.Property<string>("Description");
+
+                    b.Property<string>("DescriptionCert");
+
+                    b.Property<string>("DescriptionWhen");
 
                     b.Property<int>("Edition");
 

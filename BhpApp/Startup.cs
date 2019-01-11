@@ -3,6 +3,8 @@ using BhpApp.Helpers;
 using BhpApp.Models.JWT;
 using BhpApp.Utils;
 using BhpApp.Utils.Authentication;
+using DAL.Abstract;
+using DAL.Repositories;
 using EntityLib;
 using EntityLib.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -48,12 +50,13 @@ namespace BhpApp
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             // Register BhpContext
-            //services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
-            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConnHome")));
+            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
+            //services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConnHome")));
 
             // Dependency Injection
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             // Register the services related to in the dependency injection

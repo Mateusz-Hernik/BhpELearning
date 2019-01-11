@@ -27,9 +27,6 @@ namespace EntityLib.Configurations
             builder.Property(c => c.IsVisible)
                  .HasDefaultValue(false);
 
-            builder.Property(c => c.Description)
-                .HasMaxLength(500);
-
             builder.Property(c => c.Photo)
                 .HasMaxLength(70);
 
