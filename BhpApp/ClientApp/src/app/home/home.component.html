@@ -121,8 +121,8 @@
                       <img src="../../assets/images/course_02.jpg" alt="" class="img-responsive">
                       <div class="magnifier">
                           <div class="shop-bottom clearfix">
-                              <a href="course-checkout.html" title="Dodaj do koszyka"><i class="fa fa-shopping-cart"></i></a>&nbsp;
-                              <a href="course-single.html" title="Zobacz szczegóły" routerLinkActive="active" [routerLink]="['/course', course.id]"><i class="fa fa-search"></i></a>
+                              <a (click)="addToCart(course)" title="Dodaj do koszyka"><i class="fa fa-shopping-cart"></i></a>&nbsp;
+                              <a title="Zobacz szczegóły" routerLinkActive="active" [routerLink]="['/course', course.id]"><i class="fa fa-search"></i></a>
                           </div><!-- end shop-bottom -->
                       </div><!-- end magnifier -->
                   </div><!-- end post-media -->

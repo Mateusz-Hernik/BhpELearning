@@ -3,6 +3,7 @@ using BhpApp.Controllers.Base;
 using DAL.Abstract;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BhpApp.Controllers
@@ -25,7 +26,9 @@ namespace BhpApp.Controllers
         {
             var courses = await _courseRepository.GetAll();
 
-            return Ok(courses);
+            var coursesDto = _mapper.Map<IEnumerable<CourseDto>>(courses);
+
+            return Ok(coursesDto);
         }
 
         [HttpGet("{id}")]
@@ -38,9 +41,9 @@ namespace BhpApp.Controllers
                 return NotFound();
             }
 
-            var courseDto = _mapper.Map<CourseInfoDTO>(course);
+            var courseInfoDto = _mapper.Map<CourseInfoDto>(course);
 
-            return Ok(courseDto);           
+            return Ok(courseInfoDto);           
         }
     }
 }

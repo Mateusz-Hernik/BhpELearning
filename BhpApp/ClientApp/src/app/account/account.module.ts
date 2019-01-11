@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserService } from '../shared/services/user.service';
-import { FormsModule, EmailValidator, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/modules/shared.module';
 import { routing } from './account.routing';
 import { LoginComponent } from './login/login.component';
@@ -18,7 +18,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     routing,
     SharedModule
-  ],  
+  ],
   providers: [UserService]
 })
 export class AccountModule { }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from './base.service';
 import { ConfigService } from './config.service';
+import { Course } from '../models/course.interface';
 import { CourseInfo } from '../models/course-info.interface';
 
 import { Observable } from 'rxjs';
@@ -16,17 +17,17 @@ export class CourseService extends BaseService {
         this.baseUrl = this._configService.getApiURI();
     }
 
-    getAllCourses(): Observable<CourseInfo[]> {
+    getAllCourses(): Observable<Course[]> {
         return this._http
-            .get<CourseInfo[]>(this.baseUrl + '/courses', this.httpOptions)
+            .get<Course[]>(this.baseUrl + '/courses', this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );
     }
 
-    getCourseById(id: number) {
+    getCourseInfoById(id: number) {
         return this._http
-            .get(this.baseUrl + '/courses/' + id, this.httpOptions)
+            .get<CourseInfo>(this.baseUrl + '/courses/' + id, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );
