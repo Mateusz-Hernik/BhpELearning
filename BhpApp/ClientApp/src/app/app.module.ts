@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NavComponent } from './nav/nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ShopCartComponent } from './shop-cart/shop-cart.component';
 
 import { ConfigService } from './shared/services/config.service';
 import { CourseService } from './shared/services/course.service';
@@ -27,7 +28,8 @@ import { httpInterceptorProviders } from './shared/providers/interceptors.provid
     FooterComponent,
     LoaderComponent,
     CourseInfoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ShopCartComponent
   ],
   imports: [
     AccountModule,
