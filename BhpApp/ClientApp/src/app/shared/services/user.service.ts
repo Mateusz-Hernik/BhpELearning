@@ -14,9 +14,13 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UserService extends BaseService {
 
-    // Observable navItem source
+    // Observable navItem login status
     private _authNavStatusSource = new BehaviorSubject<boolean>(false);
     authNavStatus$ = this._authNavStatusSource.asObservable();
+
+    // Observable navItem source
+    private _authNavUserNameSource = new BehaviorSubject<string>('');
+    authNavUserName$ = this._authNavUserNameSource.asObservable();
 
     private loggedIn = false;
 
@@ -26,6 +30,7 @@ export class UserService extends BaseService {
         // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
         // header component resulting in authed user nav links disappearing despite the fact user is still logged in
         this._authNavStatusSource.next(this.loggedIn);
+        this._authNavUserNameSource.next(localStorage.getItem('user_name'));
         this.baseUrl = this._configService.getApiURI();
     }
 
@@ -50,8 +55,10 @@ export class UserService extends BaseService {
             .pipe(
                 map((res: Token) => {
                     localStorage.setItem('auth_token', res.auth_token);
+                    localStorage.setItem('user_name', res.user_name);
                     this.loggedIn = true;
                     this._authNavStatusSource.next(true);
+                    this._authNavUserNameSource.next(res.user_name);
 
                     return true;
                 }),
@@ -61,8 +68,11 @@ export class UserService extends BaseService {
 
     logout() {
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('user_name');
+        localStorage.removeItem('shop_courses');
         this.loggedIn = false;
         this._authNavStatusSource.next(false);
+        this._authNavUserNameSource.next('');
 
         // go to home page
         this._router.navigate(['/']);

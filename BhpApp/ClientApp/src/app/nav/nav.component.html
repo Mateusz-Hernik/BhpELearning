@@ -3,8 +3,9 @@
     <div class="row">
       <div class="col-md-6 col-sm-12 text-left">
         <div *ngIf="status" class="topmenu">
-          <span><i class="fa fa-envelope-o"></i> <a class="nav-item" (click)="logout()">Wyloguj</a></span>
-          <span><i class="fa fa-user fa-fw"></i> <a routerLinkActive="active" routerLink="/dashboard">Przejdź do panelu szkoleń</a></span>
+          <span><i class="fa fa-user fa-fw"></i> Witaj {{userName}}</span>
+          <span><i class="fa fa-sign-in"></i> <a routerLinkActive="active" routerLink="/dashboard">Przejdź do panelu szkoleń</a></span>
+          <span><i class="fa fa-envelope-o"></i> <a class="nav-item" (click)="logout()">Wyloguj się</a></span>          
         </div>
         <div *ngIf="!status" class="topmenu">
             <span><i class="fa fa-lock"></i> <a routerLinkActive="active" routerLink="/login">Zaloguj się</a></span>

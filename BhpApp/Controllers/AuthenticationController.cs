@@ -48,7 +48,7 @@ namespace BhpApp.Controllers
             // Serialize and return the response
             var response = new
             {
-                id = identity.Claims.Single(c => c.Type == "id").Value,
+                user_name = credentials.Email,
                 auth_token = await _jwtFactory.GenerateEncodedToken(credentials.Email, identity),
                 expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
             };

@@ -12,24 +12,28 @@ import { ShopCartService } from '../shared/services/shop-cart.service';
 })
 export class NavComponent implements OnInit, OnDestroy  {
 
-  status: boolean;
-  subscription: Subscription;
+  status: boolean;  
+  statusSubscription: Subscription;
+  userName: string;
+  userNameSubscription: Subscription;
   cartOrderAmount: number;
-  subscriptionShopCartAmount: Subscription;
+  shopCartAmountSubscription: Subscription;
 
   constructor(
     private _userService: UserService,
     private _shopCartService: ShopCartService) { }
 
   ngOnInit() {
-    this.subscription = this._userService.authNavStatus$.subscribe(status => this.status = status);
-    this.subscriptionShopCartAmount = this._shopCartService.shopCartAmountStatus$.subscribe(newAmount => this.cartOrderAmount = newAmount);
+    this.statusSubscription = this._userService.authNavStatus$.subscribe(status => this.status = status);
+    this.userNameSubscription = this._userService.authNavUserName$.subscribe(user => this.userName = user);
+    this.shopCartAmountSubscription = this._shopCartService.shopCartAmountStatus$.subscribe(amount => this.cartOrderAmount = amount);
   }
 
   ngOnDestroy() {
     // prevent memory leak when component is destroyed
-    this.subscription.unsubscribe();
-    this.subscriptionShopCartAmount.unsubscribe();
+    this.statusSubscription.unsubscribe();
+    this.userNameSubscription.unsubscribe();
+    this.shopCartAmountSubscription.unsubscribe();
   }
 
   logout() {
