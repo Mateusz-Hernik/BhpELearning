@@ -18,5 +18,6 @@ namespace EntityLib.Entities
         public string Photo { get; set; }
         public decimal Price { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
+        public ICollection<Activity> Activities { get; set; }
     }
 }

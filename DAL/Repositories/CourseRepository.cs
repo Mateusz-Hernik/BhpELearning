@@ -19,12 +19,16 @@ namespace DAL.Repositories
 
         public async Task<IEnumerable<Course>> GetAll()
         {
-            return await _dbContext.Courses.Where(x => x.IsVisible).ToListAsync();
+            return await _dbContext.Courses
+                .Where(x => x.IsVisible)
+                .ToListAsync();
         }
 
         public async Task<Course> FindById(int id)
         {
-            return await _dbContext.Courses.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _dbContext.Courses
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }

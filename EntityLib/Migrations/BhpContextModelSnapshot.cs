@@ -19,6 +19,42 @@ namespace EntityLib.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EntityLib.Entities.Activity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityType");
+
+                    b.Property<int?>("CourseId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<int>("Order");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Activities");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Activity");
+                });
+
             modelBuilder.Entity("EntityLib.Entities.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -60,6 +96,49 @@ namespace EntityLib.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CorrectAnswer");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("FirstAnswer")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<string>("FourthAnswer")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("Number");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<int?>("QuizId");
+
+                    b.Property<string>("SecondAnswer")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<string>("ThirdAnswer")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("EntityLib.Entities.RefreshToken", b =>
@@ -281,6 +360,33 @@ namespace EntityLib.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Quiz", b =>
+                {
+                    b.HasBaseType("EntityLib.Entities.Activity");
+
+                    b.Property<int>("PassCondition");
+
+                    b.Property<int>("QuestionAmount");
+
+                    b.ToTable("Quiz");
+
+                    b.HasDiscriminator().HasValue("Quiz");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Activity", b =>
+                {
+                    b.HasOne("EntityLib.Entities.Course", "Course")
+                        .WithMany("Activities")
+                        .HasForeignKey("CourseId");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Question", b =>
+                {
+                    b.HasOne("EntityLib.Entities.Quiz", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId");
                 });
 
             modelBuilder.Entity("EntityLib.Entities.UserCourse", b =>

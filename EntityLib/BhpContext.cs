@@ -12,8 +12,10 @@ namespace EntityLib
         { }
 
         public DbSet<Course> Courses { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Quiz> Quizes { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<User> Users { get; set; }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +37,14 @@ namespace EntityLib
                 .HasOne(uc => uc.Course)
                 .WithMany(c => c.UserCourses)
                 .HasForeignKey(uc => uc.CourseId);
+
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Activities)
+                .WithOne(a => a.Course);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(q => q.Questions)
+                .WithOne(q => q.Quiz);
 
             #endregion Relations
         }
