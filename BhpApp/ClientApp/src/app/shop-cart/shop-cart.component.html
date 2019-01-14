@@ -23,45 +23,50 @@
                   <!--REVIEW ORDER-->
                   <div class="panel panel-info">
                       <div class="panel-heading">
-                          Review Order
+                          Zamówienie
                       </div>
-                      <div class="panel-body">
+                      <div *ngIf="courses.length === 0" class="panel-body">
                           <div class="form-group">
-                              <div class="col-sm-3 col-xs-3">
-                                  <a href="shop-single.html"><img class="img-responsive" src="upload/small_course_01.jpg" alt=""></a>
-                              </div>
-                              <div class="col-sm-4 col-xs-6">
-                                  <div class="col-xs-12"><h4>Getting Started Bootstrap</h4></div>
-                                  <div class="col-xs-12"><small>Period:<span>3 Month</span></small></div>
-                              </div>
-                              <div class="col-sm-3 col-xs-3 text-right">
-                                  <h6><span>$</span>25.00</h6>
-                              </div>
-                              <div class="col-sm-2 col-xs-2 text-right">
-                                  <a href="#"><i class="fa fa-close"></i></a>
-                              </div>
+                              <p class="cart-empty">Zawartość koszyka jest pusta!</p>
                           </div>
-                          <div class="form-group"><hr /></div>
-                          <div class="form-group">
-                              <div class="col-sm-3 col-xs-3">
-                                  <a href="shop-single.html"><img class="img-responsive" src="upload/small_course_02.jpg" alt=""></a>
-                              </div>
-                              <div class="col-sm-4 col-xs-6">
-                                  <div class="col-xs-12"><h4>Learning Web Design in 22 Days</h4></div>
-                                  <div class="col-xs-12"><small>Period:<span>1 Year</span></small></div>
-                              </div>
-                              <div class="col-sm-3 col-xs-3 text-right">
-                                  <h6><span>$</span>25.00</h6>
-                              </div>
-                              <div class="col-sm-2 col-xs-2 text-right">
-                                  <a href="#"><i class="fa fa-close"></i></a>
-                              </div>
+                      </div>
+                      <div *ngIf="courses.length > 0" class="panel-body">
+                          <div *ngFor="let course of courses">
+                            <div class="form-group">
+                                <div class="col-sm-3 col-xs-3">
+                                    <a [routerLink]="['/course', course.id]"><img class="img-responsive" src="../../assets/images/small_course_08.jpg" alt=""></a>
+                                </div>
+                                <div class="col-sm-4 col-xs-5">
+                                    <div class="col-xs-12"><h4><a [routerLink]="['/course', course.id]">{{course.name}}</a></h4></div>
+                                    <div class="col-xs-12"><small>Data rozpoczęcia:<span>{{course.startDate | date:'dd-MM-yyyy'}}</span></small></div>
+                                </div>
+                                <div class="col-sm-2 col-xs-2 text-right">
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Zmniejsz ilość" (click)="decreaseCourseAmount(course.id)">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12"><h6>{{course.amount}}</h6></div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Zwiększ ilość" (click)="increaseCourseAmount(course.id)">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>                                                                    
+                                </div>
+                                <div class="col-sm-1 col-xs-2 text-right">
+                                    <h6>{{course.price}}&nbsp;<span>PLN</span></h6>
+                                </div>
+                                <div class="col-sm-1 col-xs-1 text-right">
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Usuń z koszyka" (click)="removeFromShopCart(course.id)"><i class="fa fa-close"></i></a>
+                                </div>                                
+                            </div>
+                            <div class="form-group"><hr /></div>
                           </div>
-                          <div class="form-group"><hr /></div>
+                          
                           <div class="form-group">
                               <div class="col-xs-12">
-                                  <label>Order Total</label>
-                                  <span>$</span> <span>50.00</span>
+                                  <label>Wartość zamówienia:&nbsp;&nbsp;</label>
+                                <span>{{totalCost}}</span>&nbsp;<span>PLN</span>
                               </div>
                           </div>
                       </div>
@@ -69,7 +74,7 @@
                   <!--REVIEW ORDER END-->
 
                   <!--SHIPPING METHOD-->
-                  <div class="panel panel-info contact_form">
+                  <div *ngIf="courses.length > 0" class="panel panel-info contact_form">
                       <div class="panel-heading">Shipping Address</div>
                       <div class="panel-body">
                           <div class="form-group">
@@ -126,7 +131,7 @@
                   <!--SHIPPING METHOD END-->
 
                   <!--CREDIT CART PAYMENT-->
-                  <div class="panel panel-info contact_form">
+                  <div *ngIf="courses.length > 0" class="panel panel-info contact_form">
                       <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
                       <div class="panel-body">
                           <div class="form-group">

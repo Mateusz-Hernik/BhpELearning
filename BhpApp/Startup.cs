@@ -50,8 +50,8 @@ namespace BhpApp
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             // Register BhpContext
-            //services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
-            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConnHome")));
+            services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConn")));
+            //services.AddDbContext<BhpContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BhpConnHome")));
 
             // Dependency Injection
             services.AddSingleton<IJwtFactory, JwtFactory>();

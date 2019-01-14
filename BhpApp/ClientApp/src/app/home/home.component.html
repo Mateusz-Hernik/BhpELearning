@@ -141,7 +141,7 @@
                               <small>{{course.price}}&nbsp;PLN</small>
                           </div><!-- end right -->
                       </div>
-                      <h3><a href="course-single.html" title="">{{course.name}}</a></h3>
+                      <h3><a [routerLink]="['/course', course.id]" title="">{{course.name}}</a></h3>
                   </div>
 
                   <div class="large-post-meta">

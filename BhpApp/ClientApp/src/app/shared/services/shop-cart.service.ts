@@ -22,9 +22,12 @@ export class ShopCartService extends BaseService {
         this._shopCartAmount.next(this.getAmountOfCourses());
     }
 
+    getOrderedCourses(): CourseShop[] {
+        return this.getCoursesFromLocalStorage();
+    }
+
     addCourseToShopCart(course: Course) {
         const courses = this.getCoursesFromLocalStorage();
-
         const index = courses.findIndex(x => x.id === course.id);
 
         if (index === -1) {
@@ -43,6 +46,38 @@ export class ShopCartService extends BaseService {
 
         this.setLocalStorageCourses(courses);
         this._shopCartAmount.next(this.getAmountOfCourses());
+    }
+
+    increaseCourseAmountInShopCart(courseId: number) {
+        const courses = this.getCoursesFromLocalStorage();
+        const index = courses.findIndex(x => x.id === courseId);
+
+        if (index !== -1) {
+            courses[index].amount++;
+        }
+
+        this.setLocalStorageCourses(courses);
+        this._shopCartAmount.next(this.getAmountOfCourses());
+    }
+
+    decreaseCourseAmountInShopCart(courseId: number): boolean {
+        const courses = this.getCoursesFromLocalStorage();
+        const index = courses.findIndex(x => x.id === courseId);
+
+        if (index !== -1 && courses[index].amount > 1) {
+            courses[index].amount--;
+
+            this.setLocalStorageCourses(courses);
+            this._shopCartAmount.next(this.getAmountOfCourses());
+
+            return true;
+        } else if (index !== -1 && courses[index].amount > 0) {
+            this.removeCourseFromShopCart(courseId);
+
+            return true;
+        }
+
+        return false;
     }
 
     getAmountOfCourses(): number {
