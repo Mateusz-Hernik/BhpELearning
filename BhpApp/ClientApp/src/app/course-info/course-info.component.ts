@@ -12,7 +12,9 @@ export class CourseInfoComponent implements OnInit {
 
   course: CourseInfo;
 
-  constructor(private _courseService: CourseService, private _activatedRoute: ActivatedRoute) { }
+  constructor(
+    private _courseService: CourseService,
+    private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this._activatedRoute.params.subscribe(params => {

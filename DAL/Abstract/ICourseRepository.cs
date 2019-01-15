@@ -6,7 +6,8 @@ namespace DAL.Abstract
 {
     public interface ICourseRepository
     {
-        Task<IEnumerable<Course>> GetAll();
-        Task<Course> FindById(int id);
+        Task<IEnumerable<Course>> GetAllAsync();
+        Task<Course> FindByIdAsync(int id);
+        Task<int> GetActiveCourseAmountAsync(string id);
     }
 }

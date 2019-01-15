@@ -57,6 +57,8 @@ namespace BhpApp
             services.AddSingleton<IJwtFactory, JwtFactory>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             // Register the services related to in the dependency injection

@@ -28,9 +28,9 @@
                         <ul>
                             <li><a href="member-profile-edit.html">Edytuj Profil</a></li>
                             <li class="active"><a href="member-profile.html">Profil</a></li>
-                            <li><a href="member-courses.html">Kursy <span>4</span></a></li>
-                            <li><a href="member-achievements.html">Oceny <span>6</span></a></li>
-                            <li><a href="member-messages.html">Wiadomości <span>5</span></a></li>
+                            <li><a href="member-courses.html">Kursy <span>{{dashboardInfo?.activeCoursesAmount}}</span></a></li>
+                            <!-- <li><a href="member-achievements.html">Oceny <span>6</span></a></li> -->
+                            <li><a href="member-messages.html">Wiadomości <span>{{dashboardInfo?.unreadMessagesAmount}}</span></a></li>
                             <!-- <li><a href="member-friends.html">Friends <span>8</span></a></li>
                             <li><a href="forums.html">Forum Topics <span>33</span></a></li> -->
                         </ul><!-- end ul -->
@@ -44,7 +44,7 @@
                 <div class="member-profile">
                     <div class="big-title">
                         <h2 class="related-title">
-                            <span>About John's</span>
+                            <span>Panel użytkownika {{dashboardInfo?.userInfo?.email}}</span>
                         </h2>
                     </div><!-- end big-title -->
 

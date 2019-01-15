@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { BaseService } from './base.service';
 import { ConfigService } from './config.service';
+import { ShopCartService } from './shop-cart.service';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Token } from '../models/token.interface';
 
 // Add the RxJS Observable operators we need in this app.
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Token } from '../models/token.interface';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -24,7 +25,12 @@ export class UserService extends BaseService {
 
     private loggedIn = false;
 
-    constructor(private _http: HttpClient, private _configService: ConfigService, private _router: Router) {
+    constructor(
+        private _http: HttpClient,
+        private _configService: ConfigService,
+        private _shopCartService: ShopCartService,
+        private _router: Router
+        ) {
         super();
         this.loggedIn = !!localStorage.getItem('auth_token');
         // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
@@ -73,6 +79,7 @@ export class UserService extends BaseService {
         this.loggedIn = false;
         this._authNavStatusSource.next(false);
         this._authNavUserNameSource.next('');
+        this._shopCartService.setShopCartAmount(0);
 
         // go to home page
         this._router.navigate(['/']);

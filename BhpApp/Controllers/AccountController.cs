@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BhpApp.Controllers
@@ -39,6 +40,8 @@ namespace BhpApp.Controllers
             }
 
             var user = _mapper.Map<User>(newUser);
+            user.Created = user.Modified = DateTime.Now;
+
             var result = await _userManager.CreateAsync(user, newUser.Password);
 
             if (!result.Succeeded)

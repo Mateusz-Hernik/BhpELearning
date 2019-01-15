@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DashboardService } from '../shared/services/dashboard.service';
+
+import { DashboardInfo } from '../shared/models/dashboard-info.interface';
+
+
 @Component({
   selector: 'app-cockpit',
   templateUrl: './cockpit.component.html',
@@ -7,7 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CockpitComponent implements OnInit {
 
-  constructor() { }
+  dashboardInfo: DashboardInfo;
+
+  constructor(
+    private _dashboardService: DashboardService) {
+      this._dashboardService.getUserDashboardInfo(localStorage.getItem('user_name'))
+        .subscribe((info: DashboardInfo) => {
+          this.dashboardInfo = info;
+        });
+  }
 
   ngOnInit() {
   }

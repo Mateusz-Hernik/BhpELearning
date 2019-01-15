@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BhpApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/courses")]
+    [Route("api/[controller]")]
     public class CoursesController : BaseController
     {
         private readonly ICourseRepository _courseRepository;
@@ -24,7 +24,7 @@ namespace BhpApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var courses = await _courseRepository.GetAll();
+            var courses = await _courseRepository.GetAllAsync();
 
             var coursesDto = _mapper.Map<IEnumerable<CourseDto>>(courses);
 
@@ -34,7 +34,7 @@ namespace BhpApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var course = await _courseRepository.FindById(id);
+            var course = await _courseRepository.FindByIdAsync(id);
 
             if (course == null)
             {

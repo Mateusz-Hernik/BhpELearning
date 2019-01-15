@@ -25,7 +25,7 @@ export class CourseService extends BaseService {
             );
     }
 
-    getCourseInfoById(id: number) {
+    getCourseInfoById(id: number): Observable<CourseInfo> {
         return this._http
             .get<CourseInfo>(this.baseUrl + '/courses/' + id, this.httpOptions)
             .pipe(

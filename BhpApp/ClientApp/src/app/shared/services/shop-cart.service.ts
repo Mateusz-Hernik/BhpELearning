@@ -26,6 +26,10 @@ export class ShopCartService extends BaseService {
         return this.getCoursesFromLocalStorage();
     }
 
+    setShopCartAmount(newvalue: number) {
+        this._shopCartAmount.next(newvalue);
+    }
+
     addCourseToShopCart(course: Course) {
         const courses = this.getCoursesFromLocalStorage();
         const index = courses.findIndex(x => x.id === course.id);

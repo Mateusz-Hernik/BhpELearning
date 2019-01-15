@@ -4015,10 +4015,10 @@ hr.invis1 {
     background-color: #ffffff;
     display: inline-block;
     width: 20px;
-    height: 20px;
-    top: 11px;
+    /* height: 20px; */
+    /* top: 11px; */
     text-align: center;
-    line-height: 18px;
+    /* line-height: 18px; */
     font-size: 11px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
