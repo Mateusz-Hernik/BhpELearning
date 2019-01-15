@@ -60,8 +60,24 @@ namespace BhpApp.Controllers
         }
 
         [HttpGet("confirm")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        {
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userName, string code)
+           {
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(code))
+            {
+                return NotFound();
+            }
+
+            var user = _userManager.FindByEmailAsync(userName);
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user.Result, code);
+
+            if (!result.Succeeded) return BadRequest();
+
             return Ok();
         }
     }

@@ -98,6 +98,62 @@ namespace EntityLib.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("EntityLib.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<bool>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<DateTime>("SendDate");
+
+                    b.Property<string>("Sender")
+                        .IsRequired();
+
+                    b.Property<string>("Text")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Progress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityId");
+
+                    b.Property<int>("CourseId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<bool>("IsCompleted")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Progresses");
+                });
+
             modelBuilder.Entity("EntityLib.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -380,6 +436,13 @@ namespace EntityLib.Migrations
                     b.HasOne("EntityLib.Entities.Course", "Course")
                         .WithMany("Activities")
                         .HasForeignKey("CourseId");
+                });
+
+            modelBuilder.Entity("EntityLib.Entities.Message", b =>
+                {
+                    b.HasOne("EntityLib.Entities.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("EntityLib.Entities.Question", b =>

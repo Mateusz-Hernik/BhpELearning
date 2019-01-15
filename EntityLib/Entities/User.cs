@@ -10,6 +10,7 @@ namespace EntityLib.Entities
         public string Surname { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
+        public ICollection<Message> Messages { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
     }
 }

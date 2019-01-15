@@ -12,6 +12,8 @@ namespace EntityLib
         { }
 
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Progress> Progresses { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Quiz> Quizes { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
@@ -45,6 +47,10 @@ namespace EntityLib
             modelBuilder.Entity<Quiz>()
                 .HasMany(q => q.Questions)
                 .WithOne(q => q.Quiz);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Messages)
+                .WithOne(m => m.User);
 
             #endregion Relations
         }
