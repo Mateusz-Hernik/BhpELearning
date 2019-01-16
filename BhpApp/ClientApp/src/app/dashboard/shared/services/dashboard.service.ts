@@ -9,6 +9,7 @@ import { UserInfo } from '../models/user-info.interface';
 
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { UserCourses } from '../models/user-courses.interface';
 
 @Injectable()
 export class DashboardService extends BaseService {
@@ -29,6 +30,14 @@ export class DashboardService extends BaseService {
     getActivityInfo(userName: string) {
         return this._http
             .get<ActivityInfo>(this.baseUrl + '/dashboard/activityinfo/' + userName, this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getUserCourses(userName: string) {
+        return this._http
+            .get<UserCourses>(this.baseUrl + '/courses/usercourses/' + userName, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );

@@ -39,5 +39,29 @@ namespace DAL.Repositories
                     && x.IsVisible && x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
                 .CountAsync();
         }
+
+        public async Task<IEnumerable<Course>> GetIncomingCourses(string id)
+        {
+            return await _dbContext.Courses
+                .Where(x => x.UserCourses.Any(uc => uc.UserId.Equals(id) && uc.IsPaid)
+                    && x.IsVisible && x.StartDate > DateTime.Now)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetActiveCourses(string id)
+        {
+            return await _dbContext.Courses
+                .Where(x => x.UserCourses.Any(uc => uc.UserId.Equals(id) && uc.IsPaid && uc.IsActive)
+                    && x.IsVisible && x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetExpiredCourses(string id)
+        {
+            return await _dbContext.Courses
+                .Where(x => x.UserCourses.Any(uc => uc.UserId.Equals(id) && uc.IsPaid)
+                    && x.EndDate < DateTime.Now)
+                .ToListAsync();
+        }
     }
 }

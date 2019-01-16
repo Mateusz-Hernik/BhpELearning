@@ -28,7 +28,7 @@ export class CourseService extends BaseService {
 
     getAllNavCourses(): Observable<CourseNav[]> {
         return this._http
-            .get<CourseNav[]>(this.baseUrl + '/courses/getnavcourses', this.httpOptions)
+            .get<CourseNav[]>(this.baseUrl + '/courses/navcourses', this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );

@@ -25,91 +25,73 @@
         <div id="sidebar1" class="col-md-9 col-sm-12">
             <div class="widget clearfix">
                 <div class="member-profile">
-                    <div class="big-title">
+                    <!-- Incoming courses section -->
+                    <div *ngIf="incomingCourses.length > 0" class="big-title">
                         <h2 class="related-title">
-                            <span>Active Courses</span>
+                            <span>Nadchodzące Kursy</span>
                         </h2>
                     </div><!-- end big-title -->
 
-                    <div class="postpager liststylepost membercourses">
+                    <div *ngIf="incomingCourses.length > 0" class="postpager liststylepost membercourses">
                         <ul class="pager">
-                            <li>
+                            <li *ngFor="let course of activeCourses">
                                 <div class="post">
                                     <a href="course-single.html">
                                         <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Learning Web Design & Development</h4>
-                                        <small>View Course</small> 
+                                        <h4>{{course.name}}</h4>
+                                        <small>Wejdź do kursu</small> 
                                     </a>
                                         &nbsp;-&nbsp;
-                                    <small>Expires : 22 June 2016</small>
-                                </div>  
-                            </li>
-                            <li>
-                                <div class="post">
-                                    <a href="course-single.html">
-                                        <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Graphic Design Introduction Course</h4>
-                                        <small>View Course</small>
-                                    </a>
-                                        &nbsp;-&nbsp;
-                                    <small>Expires : 12 May 2016</small>
-                                </div>  
-                            </li>
-                            <li>
-                                <div class="post">
-                                    <a href="course-single.html">
-                                        <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Social Media Marketing Strategy</h4>
-                                        <small>View Course</small>
-                                        &nbsp;-&nbsp;
-                                        <small>Expires : 10 May 2016</small>
-                                    </a>
+                                    <small>Rozpoczęcie : {{course.startDate | date:'dd-MM-yyyy'}}</small>
                                 </div>  
                             </li>
                         </ul>   
                     </div><!-- end postpager -->
 
-                    <hr class="invis">
-                    <br>
+                    <hr *ngIf="incomingCourses.length > 0" class="invis">
+                    <br *ngIf="incomingCourses.length > 0">
 
-                    <div class="big-title">
+                    <!-- Active courses section -->
+                    <div *ngIf="activeCourses.length > 0" class="big-title">
                         <h2 class="related-title">
-                            <span>Expired Courses</span>
+                            <span>Aktywne Kursy</span>
                         </h2>
                     </div><!-- end big-title -->
 
-                    <div class="postpager liststylepost membercourses">
+                    <div *ngIf="activeCourses.length > 0" class="postpager liststylepost membercourses">
+                        <ul class="pager">
+                            <li *ngFor="let course of activeCourses">
+                                <div class="post">
+                                    <a href="course-single.html">
+                                        <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
+                                        <h4>{{course.name}}</h4>
+                                        <small>Wejdź do kursu</small> 
+                                    </a>
+                                        &nbsp;-&nbsp;
+                                    <small>Zakończenie : {{course.endDate | date:'dd-MM-yyyy'}}</small>
+                                </div>  
+                            </li>
+                        </ul>   
+                    </div><!-- end postpager -->
+
+                    <!-- Expired courses section -->
+                    <hr *ngIf="expiredCourses.length > 0" class="invis">
+                    <br *ngIf="expiredCourses.length > 0">
+
+                    <div *ngIf="expiredCourses.length > 0" class="big-title">
+                        <h2 class="related-title">
+                            <span>Ukończone kursy</span>
+                        </h2>
+                    </div><!-- end big-title -->
+
+                    <div *ngIf="expiredCourses.length > 0" class="postpager liststylepost membercourses">
                         <ul class="pager">  
-                            <li>
+                            <li *ngFor="let course of expiredCourses">
                                 <div class="post">
-                                    <a href="course-single.html">
+                                    <a>
                                         <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Learning Professional English in 20 Days</h4>
-                                        <small>View Course</small>
-                                        &nbsp;-&nbsp;
-                                        <small>Expired : &nbsp;Join the Course</small>
-                                    </a>
-                                </div>  
-                            </li>
-                            <li>
-                                <div class="post">
-                                    <a href="course-single.html">
-                                        <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Selecting Material Design and Color Palette</h4>
-                                        <small>View Course</small>
-                                        &nbsp;-&nbsp;
-                                        <small>Expired : &nbsp;Join the Course</small>
-                                    </a>
-                                </div>  
-                            </li>
-                            <li>
-                                <div class="post">
-                                    <a href="course-single.html">
-                                        <img alt="" src="../../../assets/images/pager_01.png" class="img-responsive alignleft">
-                                        <h4>Getting Starting Web Design and Web Development</h4>
-                                         <small>View Course</small>
-                                        &nbsp;-&nbsp;
-                                        <small>Expired : &nbsp;Join the Course</small>
+                                        <h4>{{course.name}}</h4>
+                                        <small>Zakończony</small>
                                     </a>
                                 </div>  
                             </li>

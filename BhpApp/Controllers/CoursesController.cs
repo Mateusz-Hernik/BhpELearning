@@ -13,12 +13,15 @@ namespace BhpApp.Controllers
     public class CoursesController : BaseController
     {
         private readonly ICourseRepository _courseRepository;
+        private readonly IUserRepository _userRepository;
 
         public CoursesController(
             ICourseRepository courseRepository,
+            IUserRepository userRepository,
             IMapper mapper) : base(mapper)
         {
             _courseRepository = courseRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace BhpApp.Controllers
             return Ok(coursesDto);
         }
 
-        [HttpGet("getnavcourses")]
+        [HttpGet("navcourses")]
         public async Task<IActionResult> GetAllForNav()
         {
             var courses = await _courseRepository.GetAllAsync();
@@ -54,6 +57,26 @@ namespace BhpApp.Controllers
             var courseInfoDto = _mapper.Map<CourseInfoDto>(course);
 
             return Ok(courseInfoDto);           
+        }
+
+        [HttpGet("usercourses/{email}")]
+        public async Task<IActionResult> GetUserCourses(string email)
+        {
+            var user = await _userRepository.GetUserAsync(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userCoursesDto = new UserCoursesDto()
+            {
+                IncomingCourses = _mapper.Map<IEnumerable<CourseDto>>(await _courseRepository.GetIncomingCourses(user.Id)),
+                ActiveCourses = _mapper.Map<IEnumerable<CourseDto>>(await _courseRepository.GetActiveCourses(user.Id)),
+                ExpiredCourses = _mapper.Map<IEnumerable<CourseDto>>(await _courseRepository.GetExpiredCourses(user.Id))
+            };
+                
+            return Ok(userCoursesDto);
         }
     }
 }

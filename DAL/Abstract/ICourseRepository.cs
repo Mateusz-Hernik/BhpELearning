@@ -9,5 +9,8 @@ namespace DAL.Abstract
         Task<IEnumerable<Course>> GetAllAsync();
         Task<Course> FindByIdAsync(int id);
         Task<int> GetActiveCourseAmountAsync(string id);
+        Task<IEnumerable<Course>> GetIncomingCourses(string id);
+        Task<IEnumerable<Course>> GetActiveCourses(string id);
+        Task<IEnumerable<Course>> GetExpiredCourses(string id);
     }
 }
