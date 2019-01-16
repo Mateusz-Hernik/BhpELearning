@@ -84,11 +84,7 @@
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Szkolenia BHP On-Line</a>
               <ul class="dropdown-menu">
-                <li><a routerLink="/course/3">Szkolenie okresowe BHP - Pracownik administracyjno-biurowy</a></li>
-                <li><a routerLink="/course/6">Szkolenie okresowe BHP - Pracodawca i osoby kierujące pracownikami</a></li>
-                <li><a routerLink="/course/7">Szkolenie okresowe BHP - Przedstawiciel handlowy</a></li>
-                <li><a routerLink="/course/8">Szkolenie okresowe BHP - Pracownik inżynieryjno-techniczny</a></li>
-                <li><a routerLink="/course/9">Szkolenie okresowe BHP - Sprzedawca</a></li>
+                <li *ngFor="let course of courses"><a [routerLink]="['/course', course.id]">Szkolenie okresowe BHP - {{course.name}}</a></li>
                 <li><a href="page-testimonials.html">Jak to działa</a></li>
               </ul>
             </li>

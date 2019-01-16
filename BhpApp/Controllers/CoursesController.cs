@@ -31,6 +31,16 @@ namespace BhpApp.Controllers
             return Ok(coursesDto);
         }
 
+        [HttpGet("getnavcourses")]
+        public async Task<IActionResult> GetAllForNav()
+        {
+            var courses = await _courseRepository.GetAllAsync();
+
+            var coursesNavDto = _mapper.Map<IEnumerable<CourseNavDto>>(courses);
+
+            return Ok(coursesNavDto);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

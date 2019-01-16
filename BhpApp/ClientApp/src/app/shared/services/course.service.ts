@@ -5,6 +5,7 @@ import { BaseService } from './base.service';
 import { ConfigService } from './config.service';
 import { Course } from '../models/course.interface';
 import { CourseInfo } from '../models/course-info.interface';
+import { CourseNav } from '../models/course-nav.interface';
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -20,6 +21,14 @@ export class CourseService extends BaseService {
     getAllCourses(): Observable<Course[]> {
         return this._http
             .get<Course[]>(this.baseUrl + '/courses', this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getAllNavCourses(): Observable<CourseNav[]> {
+        return this._http
+            .get<CourseNav[]>(this.baseUrl + '/courses/getnavcourses', this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );
