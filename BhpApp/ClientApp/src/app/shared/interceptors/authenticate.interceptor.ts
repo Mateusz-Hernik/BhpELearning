@@ -12,6 +12,8 @@ export class AuthenticateInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((err) => {
                 if (err.status === 401 || err.status === 403) {
+                    localStorage.removeItem('auth_token');
+                    localStorage.removeItem('user_name');
                     this._router.navigate(['/login']);
                 }
                 return observableThrowError(err);

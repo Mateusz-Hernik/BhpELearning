@@ -35,7 +35,7 @@ namespace DAL.Repositories
         public async Task<int> GetActiveCourseAmountAsync(string id)
         {
             return await _dbContext.Courses
-                .Where(x => x.UserCourses.All(uc => uc.UserId.Equals(id) && uc.IsPaid && uc.IsActive)
+                .Where(x => x.UserCourses.Any(uc => uc.UserId.Equals(id) && uc.IsPaid && uc.IsActive)
                     && x.IsVisible && x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
                 .CountAsync();
         }
