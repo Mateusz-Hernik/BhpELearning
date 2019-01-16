@@ -26,24 +26,38 @@ namespace BhpApp.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("info/{email}")]
-        public async Task<IActionResult> GetDashboardInfo(string email)
+        [HttpGet("userinfo/{email}")]
+        public async Task<IActionResult> GetUserInfo(string email)
         {
-            var user = _userRepository.GetUserAsync(email);
+            var user = await _userRepository.GetUserAsync(email);
 
-            if(user.Result == null)
+            if(user == null)
             {
                 return NotFound();
             }
 
-            var dashboardInfo = new DashboardInfoDto()
+            var userInfo = _mapper.Map<UserDto>(user);
+
+            return Ok(userInfo);
+        }
+
+        [HttpGet("activityinfo/{email}")]
+        public async Task<IActionResult> GetActivityInfo(string email)
+        {
+            var user = await _userRepository.GetUserAsync(email);
+
+            if(user == null)
             {
-                ActiveCoursesAmount = await _courseRepository.GetActiveCourseAmountAsync(user.Result.Id),
-                UnreadMessagesAmount = await _messageRepository.GetUnreadAmountAsync(user.Result.Id),
-                UserInfo = _mapper.Map<UserDto>(user.Result)
+                return NotFound();
+            }
+
+            var activityInfo = new ActivityInfoDto()
+            {
+                ActiveCoursesAmount = await _courseRepository.GetActiveCourseAmountAsync(user.Id),
+                UnreadMessagesAmount = await _messageRepository.GetUnreadAmountAsync(user.Id)
             };
 
-            return Ok(dashboardInfo);
+            return Ok(activityInfo);
         }
     }
 }

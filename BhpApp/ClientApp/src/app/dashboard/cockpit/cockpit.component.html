@@ -17,26 +17,7 @@
 <div class="container" id="dashboard-container">    
     <div class="row">
         <div id="sidebar" class="col-md-3 col-sm-12 page-left-sidebar">
-            <div class="widget clearfix">
-                <div class="member-profile">
-                    <div class="big-title">
-                        <h2 class="related-title">
-                            <span>Aktywności</span>
-                        </h2>
-                    </div><!-- end big-title -->
-                    <div class="member-desc clearfix">
-                        <ul>
-                            <li><a href="member-profile-edit.html">Edytuj Profil</a></li>
-                            <li class="active"><a href="member-profile.html">Profil</a></li>
-                            <li><a href="member-courses.html">Kursy <span>{{dashboardInfo?.activeCoursesAmount}}</span></a></li>
-                            <!-- <li><a href="member-achievements.html">Oceny <span>6</span></a></li> -->
-                            <li><a href="member-messages.html">Wiadomości <span>{{dashboardInfo?.unreadMessagesAmount}}</span></a></li>
-                            <!-- <li><a href="member-friends.html">Friends <span>8</span></a></li>
-                            <li><a href="forums.html">Forum Topics <span>33</span></a></li> -->
-                        </ul><!-- end ul -->
-                    </div><!-- end team-desc -->
-                </div><!-- end team-member -->
-            </div>
+            <bhp-activity></bhp-activity>
         </div><!-- end right -->
 
         <div id="sidebar1" class="col-md-6 col-sm-12">
@@ -44,7 +25,7 @@
                 <div class="member-profile">
                     <div class="big-title">
                         <h2 class="related-title">
-                            <span>Panel użytkownika {{dashboardInfo?.userInfo?.email}}</span>
+                            <span>Panel użytkownika {{userInfo?.email}}</span>
                         </h2>
                     </div><!-- end big-title -->
 

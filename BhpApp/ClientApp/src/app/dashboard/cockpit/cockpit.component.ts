@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DashboardService } from '../shared/services/dashboard.service';
 
-import { DashboardInfo } from '../shared/models/dashboard-info.interface';
+import { UserInfo } from '../shared/models/user-info.interface';
 
 
 @Component({
@@ -12,17 +12,20 @@ import { DashboardInfo } from '../shared/models/dashboard-info.interface';
 })
 export class CockpitComponent implements OnInit {
 
-  dashboardInfo: DashboardInfo;
+  userInfo: UserInfo;
 
   constructor(
-    private _dashboardService: DashboardService) {
-      this._dashboardService.getUserDashboardInfo(localStorage.getItem('user_name'))
-        .subscribe((info: DashboardInfo) => {
-          this.dashboardInfo = info;
-        });
-  }
+    private _dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    this._dashboardService.getUserInfo(localStorage.getItem('user_name'))
+    .subscribe((info: UserInfo) => {
+      this.userInfo = info;
+    });
   }
 
 }

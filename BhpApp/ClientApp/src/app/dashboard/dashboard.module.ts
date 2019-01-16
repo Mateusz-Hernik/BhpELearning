@@ -8,11 +8,13 @@ import { CoursesComponent } from './courses/courses.component';
 import { routing } from './dashboard.routing';
 import { AuthGuard } from '../auth.guard';
 import { DashboardService } from './shared/services/dashboard.service';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
     CockpitComponent,
-    CoursesComponent
+    CoursesComponent,
+    ActivityComponent
   ],
   imports: [
     CommonModule,

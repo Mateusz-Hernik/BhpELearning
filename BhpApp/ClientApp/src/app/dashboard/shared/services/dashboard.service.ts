@@ -4,10 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 
-import { DashboardInfo } from '../models/dashboard-info.interface';
+import { ActivityInfo } from '../models/activity-info.interface';
+import { UserInfo } from '../models/user-info.interface';
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService extends BaseService {
@@ -17,12 +18,19 @@ export class DashboardService extends BaseService {
         this.baseUrl = this._configService.getApiURI();
     }
 
-    getUserDashboardInfo(userName: string): Observable<DashboardInfo> {
+    getUserInfo(userName: string): Observable<UserInfo> {
         return this._http
-            .get<DashboardInfo>(this.baseUrl + '/dashboard/info/' + userName, this.httpOptions)
+            .get<UserInfo>(this.baseUrl + '/dashboard/userinfo/' + userName, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );
     }
 
+    getActivityInfo(userName: string) {
+        return this._http
+            .get<ActivityInfo>(this.baseUrl + '/dashboard/activityinfo/' + userName, this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 }
