@@ -12,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { DashboardService } from './shared/services/dashboard.service';
 import { MessageService } from './shared/services/message.service';
 import { MessageComponent } from './message/message.component';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MessageComponent } from './message/message.component';
     CoursesComponent,
     ActivityComponent,
     MessagesComponent,
-    MessageComponent
+    MessageComponent,
+    CourseComponent
   ],
   imports: [
     CommonModule,
