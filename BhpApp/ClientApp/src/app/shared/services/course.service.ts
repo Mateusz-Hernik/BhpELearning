@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from './base.service';
 import { ConfigService } from './config.service';
+
 import { Course } from '../models/course.interface';
 import { CourseInfo } from '../models/course-info.interface';
 import { CourseNav } from '../models/course-nav.interface';

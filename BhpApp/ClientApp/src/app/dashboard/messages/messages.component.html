@@ -1,0 +1,69 @@
+<div class="page-title bgg">
+  <div class="container clearfix">
+      <div class="title-area pull-left">
+          <h2>Twoje wiadomości <small>Poniżej znajuje się lista otrzymanych wiadomości i powiadomień.</small></h2>
+      </div><!-- /.pull-right -->
+      <div class="pull-right hidden-xs">
+          <div class="bread">
+              <ol class="breadcrumb">
+                  <li><a routerLinkActive="active" routerLink="/">Strona Główna</a></li>
+                  <li><a routerLinkActive="active" routerLink="/dashboard">Panel Szkoleń BHP</a></li>
+                  <li class="active">Wiadomości</li>
+              </ol>
+          </div><!-- end bread -->
+      </div><!-- /.pull-right -->
+  </div>
+</div><!-- end page-title -->
+
+<section class="section litpadtop bgw">
+    <div class="container" id="messages-container">
+        <div class="row">
+            <div id="sidebar" class="col-md-3 col-sm-12 page-left-sidebar">
+                <bhp-activity></bhp-activity>
+            </div><!-- end right -->
+
+            <div id="sidebar1" class="col-md-9 col-sm-12">
+                <div class="widget clearfix">
+                    <div class="member-profile">
+                        <div class="big-title">
+                            <h2 class="related-title">
+                                <span>Otrzymane Wiadomości</span>
+                            </h2>
+                        </div><!-- end big-title -->
+
+                        <div *ngFor="let message of messages" routerLinkActive="active" [ngClass]="{ 'message-new': !message.isRead }" class="messages panel">
+                            <div class="panel-body">
+                                <div class="form-group row wow fadeIn">
+                                    <div class="col-sm-2 col-xs-12 text-center">
+                                        <a routerLinkActive="active" [routerLink]="['/dashboard/messages', message.id]"><img alt="" class="img-responsive img-thumbnail" src="../../../assets/images/member_01.jpg">
+                                        <small>Od : {{message.sender}}</small><br>
+                                        <small>{{message.sendDate | date:'dd-MM-yyyy'}}</small>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <a routerLinkActive="active" [routerLink]="['/dashboard/messages', message.id]">
+                                        <h4>{{message.title}}</h4>
+                                            <ul>
+                                                <li>
+                                                    {{message.text | slice:0:100}}<span *ngIf="message.text.length > 100">...</span>
+                                                </li>
+                                            </ul>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-12 text-center">
+                                        <ul>
+                                            <li>
+                                                <a routerLinkActive="active" [routerLink]="['/dashboard/messages', message.id]" class="btn btn-primary btn-square">Odpowiedz</a>&nbsp;
+                                                <a data-toggle="tooltip" data-placement="bottom" title="Usuń wiadomość" (click)="deleteMessage(message.id)" class="btn btn-primary btn-square"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!-- end form-group -->         
+                            </div><!-- end panel body -->
+                        </div><!-- end storelist -->
+                    </div><!-- end team-member -->
+                </div>
+            </div><!-- end right -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>

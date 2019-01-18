@@ -120,6 +120,8 @@ namespace EntityLib.Migrations
                     b.Property<string>("Text")
                         .IsRequired();
 
+                    b.Property<string>("Title");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");

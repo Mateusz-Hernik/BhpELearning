@@ -17,10 +17,18 @@ namespace DAL.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<Message> FindAsync(int id)
+        {
+            return await _dbContext.Messages
+                .Where(x => x.Id.Equals(id))
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Message>> GetAllAsync(string id)
         {
             return await _dbContext.Messages
                 .Where(x => x.User.Id.Equals(id))
+                .OrderByDescending(x => x.SendDate)
                 .ToListAsync();
         }
 
@@ -28,6 +36,7 @@ namespace DAL.Repositories
         {
             return await _dbContext.Messages
                 .Where(x => x.User.Id.Equals(id) && !x.IsRead)
+                .OrderByDescending(x => x.SendDate)
                 .ToListAsync();
         }
 
@@ -36,6 +45,34 @@ namespace DAL.Repositories
             return await _dbContext.Messages
                 .Where(x => x.User.Id.Equals(id) && !x.IsRead)
                 .CountAsync();
+        }
+
+        public async Task ChangeUnreadStateAsync(int id)
+        {
+            var message = await _dbContext.Messages.Where(x => x.Id.Equals(id))
+                .FirstOrDefaultAsync();
+
+            if(message != null && !message.IsRead)
+            {
+                message.IsRead = true;
+
+                _dbContext.Messages.Update(message);
+
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteMessage(int id)
+        {
+            var message = await _dbContext.Messages.Where(x => x.Id.Equals(id))
+                .FirstOrDefaultAsync();
+
+            if (message != null)
+            {
+                _dbContext.Messages.Remove(message);
+
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }
