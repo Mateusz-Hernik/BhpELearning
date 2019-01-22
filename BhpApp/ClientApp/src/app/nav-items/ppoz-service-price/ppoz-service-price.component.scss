@@ -1,0 +1,19 @@
+@media (min-width: 992px) {
+    .mob20 {
+        margin-bottom: 20px;
+    }
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-widget .widget-title {
+    text-transform: none !important;
+}

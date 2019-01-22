@@ -10,8 +10,8 @@ import { MessagesComponent } from './messages/messages.component';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
     { path: 'dashboard', component: CockpitComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard/courses', component: CoursesComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard/courses/:id', component: CourseComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard/messages', component: MessagesComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard/messages/:id', component: MessageComponent, canActivate: [AuthGuard] }
+    { path: 'dashboard/kursy', component: CoursesComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard/kursy/:id', component: CourseComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard/wiadomosci', component: MessagesComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard/wiadomosci/:id', component: MessageComponent, canActivate: [AuthGuard] }
 ]);

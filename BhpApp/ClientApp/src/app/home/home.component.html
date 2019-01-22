@@ -122,7 +122,7 @@
                       <div class="magnifier">
                           <div class="shop-bottom clearfix">
                               <a (click)="addToCart(course)" title="Dodaj do koszyka"><i class="fa fa-shopping-cart"></i></a>&nbsp;
-                              <a title="Zobacz szczegóły" routerLinkActive="active" [routerLink]="['/course', course.id]"><i class="fa fa-search"></i></a>
+                              <a title="Zobacz szczegóły" routerLinkActive="active" [routerLink]="['/kurs', course.id]"><i class="fa fa-search"></i></a>
                           </div><!-- end shop-bottom -->
                       </div><!-- end magnifier -->
                   </div><!-- end post-media -->
@@ -153,3 +153,79 @@
       </div><!-- end carousel-wrapper -->
   </div><!-- end container -->
 </section><!-- end section -->
+
+<section class="welcomebox-wrapper">
+    <div class="container">
+        <div class="welcomebox m900">   
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h2>Szkolenia BHP online</h2>
+                    <p>Zacznij od utowrzenia nowego konta i uzyskaj pełny dostep do naszych ofert!</p>
+                </div><!-- end col -->
+                <div class="col-md-4 col-sm-4 col-xs-12 text-right">
+                    <a routerLinkActive="active" routerLink="/rejestracja" class="btn btn-default">Stwórz konto</a>
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end callout -->  
+    </div>
+</section><!-- end section -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-6 col-xs-12">
+                <div class="widget">
+                    <h2 class="related-title">
+                        <span>About Teachme</span>
+                    </h2>
+
+                    <div class="text-widget">
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+
+                        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took...</p>
+
+                        <a href="#" class="btn btn-primary btn-square">Read More</a>
+                    </div>
+                </div><!-- end widget -->
+            </div><!-- end col -->
+
+            <div class="col-md-4 col-md-6 col-xs-12">
+                <div class="widget">
+                    <h2 class="related-title">
+                        <span>Recent Tweets</span>
+                    </h2>
+
+                    <div class="twitter-widget">
+                        <ul class="latest-tweets">
+                            <li>
+                                <p><a href="#" title="">@showwpcom</a> Consectetur adipiscing elit. Integer lorem quam. lorem ipsum dolor sit amet.</p>
+                                <small>2 hours ago</small>
+                            </li>
+                            <li>
+                                <p><a href="#" title="">@Envato</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <small>2 hours ago</small>
+                            </li>
+                        </ul><!-- end latest-tweet -->
+                    </div><!-- end twitter-widget -->
+                </div><!-- end widget -->
+            </div><!-- end col -->
+
+            <div class="col-md-4 col-md-6 col-xs-12">
+                <div class="widget">
+                    <h2 class="related-title">
+                        <span>Contact Details</span>
+                    </h2>
+
+                    <ul class="contact-details">
+                        <li><i class="fa fa-link"></i> <a href="#">www.yoursite.com</a></li>
+                        <li><i class="fa fa-envelope-o"></i> <a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+                        <li><i class="fa fa-phone"></i> +90 123 45 67</li>
+                        <li><i class="fa fa-fax"></i> +90 123 45 68</li>
+                        <li><i class="fa fa-home"></i> Envato INC 22 Elizabeth St.</li>
+                    </ul>
+
+                </div><!-- end widget -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</footer><!-- end footer -->

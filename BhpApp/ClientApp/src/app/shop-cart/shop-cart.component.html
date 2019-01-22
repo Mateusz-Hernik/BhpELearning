@@ -34,10 +34,10 @@
                           <div *ngFor="let course of courses">
                             <div class="form-group">
                                 <div class="col-sm-3 col-xs-3">
-                                    <a [routerLink]="['/course', course.id]"><img class="img-responsive" src="../../assets/images/small_course_08.jpg" alt=""></a>
+                                    <a [routerLink]="['/kurs', course.id]"><img class="img-responsive" src="../../assets/images/small_course_08.jpg" alt=""></a>
                                 </div>
                                 <div class="col-sm-4 col-xs-5">
-                                    <div class="col-xs-12"><h4><a [routerLink]="['/course', course.id]">{{course.name}}</a></h4></div>
+                                    <div class="col-xs-12"><h4><a [routerLink]="['/kurs', course.id]">{{course.name}}</a></h4></div>
                                     <div class="col-xs-12"><small>Data rozpoczęcia:<span>{{course.startDate | date:'dd-MM-yyyy'}}</span></small></div>
                                 </div>
                                 <div class="col-sm-2 col-xs-2 text-right">

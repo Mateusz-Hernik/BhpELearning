@@ -9,9 +9,9 @@
         <ul>
             <li routerLinkActive="active"><a href="member-profile-edit.html">Edytuj Profil</a></li>
             <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/dashboard">Profil</a></li>
-            <li routerLinkActive="active"><a routerLink="/dashboard/courses">Kursy <span *ngIf="activityInfo?.activeCoursesAmount > 0">{{activityInfo?.activeCoursesAmount}}</span></a></li>
+            <li routerLinkActive="active"><a routerLink="/dashboard/kursy">Kursy <span *ngIf="activityInfo?.activeCoursesAmount > 0">{{activityInfo?.activeCoursesAmount}}</span></a></li>
             <!-- <li><a href="member-achievements.html">Oceny <span>6</span></a></li> -->
-            <li routerLinkActive="active"><a routerLink="/dashboard/messages">Wiadomości <span *ngIf="activityInfo?.unreadMessagesAmount > 0">{{activityInfo?.unreadMessagesAmount}}</span></a></li>
+            <li routerLinkActive="active"><a routerLink="/dashboard/wiadomosci">Wiadomości <span *ngIf="activityInfo?.unreadMessagesAmount > 0">{{activityInfo?.unreadMessagesAmount}}</span></a></li>
             <!-- <li><a href="member-friends.html">Friends <span>8</span></a></li>
             <li><a href="forums.html">Forum Topics <span>33</span></a></li> -->
         </ul><!-- end ul -->

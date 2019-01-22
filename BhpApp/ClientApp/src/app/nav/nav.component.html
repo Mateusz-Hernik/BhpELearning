@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-md-7 col-sm-12 text-left">
         <div *ngIf="status" class="topmenu">
-          <span><i class="fa fa-user fa-fw"></i> Witaj {{userName}}</span>
-          <span><i class="fa fa-sign-in"></i> <a routerLinkActive="active" routerLink="/dashboard">Przejdź do panelu szkoleń</a></span>
-          <span><i class="fa fa-envelope-o"></i> <a class="nav-item" (click)="logout()">Wyloguj się</a></span>          
+          <span><i class="fa fa-user fa-fw"></i>Witaj {{userName}}</span>
+          <span><i class="fa fa-sign-in"></i><a routerLinkActive="active" routerLink="/dashboard">Przejdź do panelu szkoleń</a></span>
+          <span><i class="fa fa-envelope-o"></i><a class="nav-item" (click)="logout()">Wyloguj się</a></span>          
         </div>
         <div *ngIf="!status" class="topmenu">
-            <span><i class="fa fa-lock"></i> <a routerLinkActive="active" routerLink="/login">Zaloguj się</a></span>
-            <span><i class="fa fa-sign-in"></i> <a routerLinkActive="active" routerLink="/register">Zarejestruj się już teraz!</a></span>
+            <span><i class="fa fa-lock"></i> <a routerLinkActive="active" routerLink="/logowanie">Zaloguj się</a></span>
+            <span><i class="fa fa-sign-in"></i> <a routerLinkActive="active" routerLink="/rejestracja">Zarejestruj się już teraz!</a></span>
           </div><!-- end callus -->
       </div>
       <div class="col-md-5 col-sm-12 text-right">
@@ -63,51 +63,51 @@
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usługi BHP</a>
               <ul class="dropdown-menu">
-                  <li><a href="index-1.html">Szkolenia BHP wstępne i okresowe</a></li>
-                  <li><a href="index-2.html">Opracowywanie Oceny Ryzyka Zawodowego</a></li>
-                  <li><a href="index-3.html">Przeprowadzanie okresowych kontroli warunków pracy</a></li>
-                  <li><a href="index-4.html">Dobór środków ochrony zbiorowej i indywidualnej</a></li>
-                  <li><a href="index-5.html">Nadzór nad właściwym oznakowaniem obiektów w zakresie BHP i PPOŻ.</a></li>
-                  <li><a href="index-6.html">Opracowywanie dokumentacji związanej z wypadkami przy pracy</a></li>
-                  <li><a href="index-7.html">Opracowywanie Planu bezpieczeństwa i ochrony zdrowia (BIOZ)</a></li>
-                  <li><a href="index-7.html">Outsourcing BHP</a></li>
+                  <li><a routerLink="/szkoleniabhp">Szkolenia BHP wstępne i okresowe</a></li>
+                  <li><a routerLink="/opracowywanieorz">Opracowywanie Oceny Ryzyka Zawodowego</a></li>
+                  <li><a routerLink="/kontrole">Przeprowadzanie okresowych kontroli warunków pracy</a></li>
+                  <li><a routerLink="/doborsrodkow">Dobór środków ochrony zbiorowej i indywidualnej</a></li>
+                  <li><a routerLink="/nadzor">Nadzór nad właściwym oznakowaniem obiektów w zakresie BHP i PPOŻ.</a></li>
+                  <li><a routerLink="/opracowywaniewpp">Opracowywanie dokumentacji związanej z wypadkami przy pracy</a></li>
+                  <li><a routerLink="/opracowywaniebioz">Opracowywanie Planu bezpieczeństwa i ochrony zdrowia (BIOZ)</a></li>
+                  <li><a routerLink="/outsourcing">Outsourcing BHP</a></li>
                 </ul>
             </li>
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usługi PPOŻ</a>
               <ul class="dropdown-menu">
-                <li><a href="course-list.html">Szkolenie PPOŻ</a></li>
-                <li><a href="course-grid.html">Opracowywanie instrukcji bezpieczeństwa przeciwpożarowego</a></li>
-                <li><a href="course-filterable-3.html">Nadzór PPOŻ</a></li>
+                <li><a routerLink="/szkolenieppoz">Szkolenie PPOŻ</a></li>
+                <li><a routerLink="/opracowywanieinstrukcjibp">Opracowywanie instrukcji bezpieczeństwa przeciwpożarowego</a></li>
+                <li><a routerLink="/nadzorppoz">Nadzór PPOŻ</a></li>
               </ul>
             </li>
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Szkolenia BHP On-Line</a>
               <ul class="dropdown-menu">
-                <li *ngFor="let course of courses"><a [routerLink]="['/course', course.id]">Szkolenie okresowe BHP - {{course.name}}</a></li>
-                <li><a href="page-testimonials.html">Jak to działa</a></li>
+                <li *ngFor="let course of courses"><a [routerLink]="['/kurs', course.id]">Szkolenie okresowe BHP - {{course.name}}</a></li>
+                <li><a routerLink="/instrukcja">Jak to działa</a></li>
               </ul>
             </li>
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cennik</a>
               <ul class="dropdown-menu">
-                <li><a href="page-about.html">Usługi BHP cennik</a></li>
-                <li><a href="page-pricing.html">Usługi PPOŻ cennik</a></li>
-                <li><a href="page-contact.html">Szkolenia BHP cennik</a></li>
-                <li><a href="page-became-member-profile.html">Szkolenia PPOŻ cennik</a></li>
+                <li><a routerLink="/cennik/uslugibhp">Usługi BHP cennik</a></li>
+                <li><a routerLink="/cennik/uslugippoz">Usługi PPOŻ cennik</a></li>
+                <li><a routerLink="/cennik/szkoleniabhp">Szkolenia BHP cennik</a></li>
+                <li><a routerLink="/cennik/szkoleniappoz">Szkolenia PPOŻ cennik</a></li>
               </ul>
             </li>
             <li routerLinkActive="active" class="dropdown hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kontakt</a>
               <ul class="dropdown-menu">
-                <li><a href="blog.html">O nas</a></li>
-                <li><a href="blog-1.html">RODO</a></li>
-                <li><a href="blog-2.html">Regulamin</a></li>
+                <li><a routerLink="/onas">O nas</a></li>
+                <li><a routerLink="/rodo">RODO</a></li>
+                <li><a routerLink="/regulamin">Regulamin</a></li>
               </ul>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="cartmenu" routerLinkActive="active"><a routerLink="/checkout"><i class="fa fa-shopping-bag"></i> <sup *ngIf="cartOrderAmount > 0">{{cartOrderAmount}}</sup></a></li>
+            <li class="cartmenu" routerLinkActive="active"><a routerLink="/koszyk"><i class="fa fa-shopping-bag"></i> <sup *ngIf="cartOrderAmount > 0">{{cartOrderAmount}}</sup></a></li>
             <li class="dropdown cartmenu searchmenu hasmenu">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></a>
               <ul class="dropdown-menu show-right">
