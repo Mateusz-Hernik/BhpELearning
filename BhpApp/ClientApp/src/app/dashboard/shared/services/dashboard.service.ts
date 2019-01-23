@@ -6,10 +6,11 @@ import { ConfigService } from 'src/app/shared/services/config.service';
 
 import { ActivityInfo } from '../models/activity-info.interface';
 import { UserInfo } from '../models/user-info.interface';
+import { UserCourses } from '../models/user-courses.interface';
+import { UserCourse } from '../models/user-course.interface';
 
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { UserCourses } from '../models/user-courses.interface';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService extends BaseService {
@@ -27,7 +28,7 @@ export class DashboardService extends BaseService {
             );
     }
 
-    getActivityInfo(userName: string) {
+    getActivityInfo(userName: string): Observable<ActivityInfo> {
         return this._http
             .get<ActivityInfo>(this.baseUrl + '/dashboard/activityinfo/' + userName, this.httpOptions)
             .pipe(
@@ -35,9 +36,17 @@ export class DashboardService extends BaseService {
             );
     }
 
-    getUserCourses(userName: string) {
+    getUserCourses(userName: string): Observable<UserCourses> {
         return this._http
             .get<UserCourses>(this.baseUrl + '/courses/usercourses/' + userName, this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getUserCourse(userName: string, courseId: number): Observable<UserCourse> {
+        return this._http
+            .get<UserCourse>(this.baseUrl + '/dashboard/usercourse/' + userName + '/' + courseId, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );

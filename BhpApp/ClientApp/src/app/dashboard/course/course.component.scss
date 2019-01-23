@@ -6,6 +6,10 @@
     padding: 70px 0 !important;
 }
 
+.course-table .table > thead > tr > th, .course-table .table > tbody > tr > th, .course-table .table > tfoot > tr > th, .course-table .table > thead > tr > td, .course-table .table > tbody > tr > td, .course-table .table > tfoot > tr > td {
+    padding: 20px 20px !important;
+}
+
 @media (max-width: 767.98px) { 
     #course-container {
         padding: 0 15px;

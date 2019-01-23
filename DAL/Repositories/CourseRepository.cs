@@ -32,6 +32,21 @@ namespace DAL.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Course> GetUserCourseAsync(string userId, int courseId)
+        {
+            var course = await _dbContext.Courses
+                .Include(x => x.Activities)
+                .Where(x => x.Id.Equals(courseId) && x.IsVisible
+                    && x.UserCourses.Any(uc => uc.UserId.Equals(userId)))
+                .FirstOrDefaultAsync();
+
+            course.Activities = course.Activities
+                .OrderBy(x => x.Order)
+                .ToList();
+
+            return course;
+        }
+
         public async Task<int> GetActiveCourseAmountAsync(string id)
         {
             return await _dbContext.Courses

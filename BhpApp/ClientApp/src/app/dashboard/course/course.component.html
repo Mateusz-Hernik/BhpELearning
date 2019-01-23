@@ -30,7 +30,8 @@
                       <span>Lekcje szkolenia</span>
                   </h2>
               </div><!-- end big-title -->
-              <table class="table">
+              <p *ngIf="course?.activities.length == 0">Ten kurs nie posiada jeszcze żadnych lekcji.</p>
+              <table *ngIf="course?.activities.length > 0" class="table">
                   <thead>
                       <tr>
                           <th>Rodzaj</th>
@@ -38,33 +39,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td><i class="fa fa-play-circle"></i></td>
-                          <td><a>Introduction</a></td>
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-music"></i></td>
-                          <td>Lesson One - What is Photoshop</td>
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-play-circle"></i></td>
-                          <td>Lesson Two - How to Use Tools</td>
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-music"></i></td>
-                          <td>Lesson Three - Creating First Homepage</td>
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-play-circle"></i></td>
-                          <td>Lesson Four - Understanding Colors</td>
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-play-circle"></i></td>
-                          <td>Lesson Five - International Sizes</td>     
-                      </tr>
-                      <tr>
-                          <td><i class="fa fa-question-circle"></i></td>
-                          <td><a>Quiz Time - Your First Quiz</a></td>
+                      <tr *ngFor="let activity of course?.activities">
+                          <td>
+                              <i *ngIf="activity?.activityType == 0" class="fa fa-question-circle"></i>
+                              <i *ngIf="activity?.activityType == 1" class="fa fa-play-circle"></i>
+                              <i *ngIf="activity?.activityType == 2" class="fa fa-files-o"></i>
+                          </td>
+                          <td>{{activity?.name}}</td>
                       </tr>
                   </tbody>
               </table>

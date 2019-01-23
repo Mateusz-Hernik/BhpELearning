@@ -59,5 +59,20 @@ namespace BhpApp.Controllers
 
             return Ok(activityInfo);
         }
+
+        [HttpGet("usercourse/{email}/{id}")]
+        public async Task<IActionResult> GetActivityInfo(string email, int id)
+        {
+            var user = await _userRepository.GetUserAsync(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userCourseDto = _mapper.Map<UserCourseDto>(await _courseRepository.GetUserCourseAsync(user.Id, id));
+
+            return Ok(userCourseDto);
+        }
     }
 }

@@ -420,6 +420,16 @@ namespace EntityLib.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("EntityLib.Entities.Presentation", b =>
+                {
+                    b.HasBaseType("EntityLib.Entities.Activity");
+
+
+                    b.ToTable("Presentation");
+
+                    b.HasDiscriminator().HasValue("Presentation");
+                });
+
             modelBuilder.Entity("EntityLib.Entities.Quiz", b =>
                 {
                     b.HasBaseType("EntityLib.Entities.Activity");
