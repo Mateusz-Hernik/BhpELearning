@@ -2,7 +2,9 @@
 using BhpApp.Controllers.Base;
 using DAL.Abstract;
 using DTO;
+using EntityLib.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BhpApp.Controllers
@@ -11,16 +13,19 @@ namespace BhpApp.Controllers
     [Route("api/[controller]")]
     public class DashboardController : BaseController
     {
+        private readonly IActivityRepository _activityRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IUserRepository _userRepository;
 
         public DashboardController(
+            IActivityRepository activityRepository,
             ICourseRepository courseRepository,
             IMessageRepository messageRepository,
             IUserRepository userRepository,
             IMapper mapper) : base(mapper)
         {
+            _activityRepository = activityRepository;
             _courseRepository = courseRepository;
             _messageRepository = messageRepository;
             _userRepository = userRepository;
@@ -64,6 +69,7 @@ namespace BhpApp.Controllers
         public async Task<IActionResult> GetActivityInfo(string email, int id)
         {
             var user = await _userRepository.GetUserAsync(email);
+            Progress prevProgress = null;
 
             if (user == null)
             {
@@ -71,6 +77,27 @@ namespace BhpApp.Controllers
             }
 
             var userCourseDto = _mapper.Map<UserCourseDto>(await _courseRepository.GetUserCourseAsync(user.Id, id));
+
+            foreach(var activity in userCourseDto.Activities)
+            {
+                var progress = await _activityRepository.GetActivityProgressAsync(user.Id, id, activity.Id);
+
+                if(progress != null)
+                {
+                    activity.IsCompleted = progress.IsCompleted;
+
+                    if(prevProgress != null)
+                    {
+                        activity.IsAvaiable = prevProgress.IsCompleted && activity.StartDate <= DateTime.Now;
+                    } 
+                    else
+                    {
+                        activity.IsAvaiable = activity.StartDate <= DateTime.Now;
+                    }
+                }
+
+                prevProgress = progress;
+            }
 
             return Ok(userCourseDto);
         }

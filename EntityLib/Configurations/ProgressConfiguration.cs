@@ -20,6 +20,9 @@ namespace EntityLib.Configurations
             builder.Property(c => c.IsCompleted)
                 .IsRequired()
                 .HasDefaultValue(false);
+
+            builder.Property(c => c.Result)
+                .IsRequired(false);
         }
     }
 }

@@ -4,4 +4,6 @@ export interface ActivityDescrption {
     order: number;
     activityType: number;
     startDate: Date;
+    isCompleted: boolean;
+    isAvaiable: boolean;
 }

@@ -9,5 +9,7 @@ namespace DTO
         public int Order { get; set; }
         public int ActivityType { get; set; }
         public DateTime StartDate { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsAvaiable { get; set; }
     }
 }

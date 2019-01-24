@@ -149,7 +149,10 @@ namespace EntityLib.Migrations
 
                     b.Property<DateTime>("Modified");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("Result");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -162,7 +165,8 @@ namespace EntityLib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CorrectAnswer");
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired();
 
                     b.Property<DateTime>("Created");
 

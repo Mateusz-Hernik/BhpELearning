@@ -6,7 +6,7 @@ namespace EntityLib.Entities
     {
         public int Number { get; set; }
         public string QuestionText { get; set; }
-        public int CorrectAnswer { get; set; }
+        public string CorrectAnswer { get; set; }
         public string FirstAnswer { get; set; }
         public string SecondAnswer { get; set; }
         public string ThirdAnswer { get; set; }

@@ -37,7 +37,7 @@ namespace DAL.Repositories
             var course = await _dbContext.Courses
                 .Include(x => x.Activities)
                 .Where(x => x.Id.Equals(courseId) && x.IsVisible
-                    && x.UserCourses.Any(uc => uc.UserId.Equals(userId)))
+                    && x.UserCourses.Any(uc => uc.UserId.Equals(userId) && uc.IsPaid && uc.IsActive))
                 .FirstOrDefaultAsync();
 
             course.Activities = course.Activities

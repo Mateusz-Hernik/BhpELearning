@@ -10,6 +10,16 @@
     padding: 20px 20px !important;
 }
 
+.fa-status-completed {
+    background-color: #60A830 !important;
+    border-color: #60A830 !important;
+}
+
+.fa-status-unavaiable {
+    background-color: #C21807 !important;
+    border-color: #C21807 !important;
+}
+
 @media (max-width: 767.98px) { 
     #course-container {
         padding: 0 15px;
