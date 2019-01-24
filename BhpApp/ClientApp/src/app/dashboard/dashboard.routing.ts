@@ -7,11 +7,13 @@ import { CourseComponent } from './course/course.component';
 import { CoursesComponent } from './courses/courses.component';
 import { MessageComponent } from './message/message.component';
 import { MessagesComponent } from './messages/messages.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
     { path: 'dashboard', component: CockpitComponent, canActivate: [AuthGuard] },
     { path: 'dashboard/kursy', component: CoursesComponent, canActivate: [AuthGuard] },
     { path: 'dashboard/kursy/:id', component: CourseComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard/kursy/:id/quiz/:id2', component: QuizComponent, canActivate: [AuthGuard] },
     { path: 'dashboard/wiadomosci', component: MessagesComponent, canActivate: [AuthGuard] },
     { path: 'dashboard/wiadomosci/:id', component: MessageComponent, canActivate: [AuthGuard] }
 ]);
