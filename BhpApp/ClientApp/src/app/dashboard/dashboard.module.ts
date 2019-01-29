@@ -8,12 +8,14 @@ import { ActivityComponent } from './activity/activity.component';
 import { CockpitComponent } from './cockpit/cockpit.component';
 import { CoursesComponent } from './courses/courses.component';
 import { MessagesComponent } from './messages/messages.component';
-
-import { DashboardService } from './shared/services/dashboard.service';
-import { MessageService } from './shared/services/message.service';
 import { MessageComponent } from './message/message.component';
 import { CourseComponent } from './course/course.component';
 import { QuizComponent } from './quiz/quiz.component';
+
+import { ActivityService } from './shared/services/activity.service';
+import { DashboardService } from './shared/services/dashboard.service';
+import { MessageService } from './shared/services/message.service';
+import { QuizService } from './shared/services/quiz.service';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,10 @@ import { QuizComponent } from './quiz/quiz.component';
   ],
   providers: [
     AuthGuard,
+    ActivityService,
     DashboardService,
-    MessageService
+    MessageService,
+    QuizService
   ]
 })
 export class DashboardModule { }

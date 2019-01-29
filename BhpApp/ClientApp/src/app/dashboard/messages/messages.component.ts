@@ -32,5 +32,4 @@ export class MessagesComponent implements OnInit {
         this. messages = this.messages.filter(x => x.id !== id);
       });
   }
-
 }

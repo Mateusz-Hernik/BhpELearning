@@ -12,5 +12,6 @@ namespace DAL.Abstract
         Task<int> GetUnreadAmountAsync(string id);
         Task ChangeUnreadStateAsync(int id);
         Task DeleteMessage(int id);
+        Task SendMessageAsync(Message message);
     }
 }

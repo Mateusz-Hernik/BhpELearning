@@ -32,7 +32,6 @@ export class MessageComponent implements OnInit {
   }
 
   private changeMessageReadStatus() {
-    console.log(this.message);
     this._activatedRoute.params.subscribe(params => {
       this._mssageService.changeMessageReadStatus(params['id'])
         .subscribe();

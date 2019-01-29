@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
           <li><a routerLinkActive="active" routerLink="/">Strona Główna</a></li>
           <li><a routerLinkActive="active" routerLink="/dashboard">Panel Szkoleń BHP</a></li>
-          <li><a routerLinkActive="active" routerLink="/dashboard/courses">Kursy</a></li>
+          <li><a routerLinkActive="active" routerLink="/dashboard/kursy">Kursy</a></li>
           <li class="active">Kurs</li>
         </ol>
       </div><!-- end bread -->
@@ -80,7 +80,7 @@
                             <i data-toggle="tooltip" data-placement="bottom" title="Lekcja niedostępna" *ngIf="!activity?.isAvaiable" class="fa-status-unavaiable fa fa-expeditedssl"></i>
                           </td>
                           <td>
-                            <button routerLinkActive="active" [routerLink]="['/dashboard/kursy', course?.id, 'quiz', activity?.id]" *ngIf="activity?.isAvaiable" [disabled]="!activity?.isAvaiable || activity?.isCompleted" class="btn btn-primary btn-square table-btn">Rozpocznij lekcję</button>
+                            <button routerLinkActive="active" [routerLink]="['/dashboard/kursy', course?.id, 'quiz', activity?.id]" *ngIf="activity?.isAvaiable" [disabled]="!activity?.isAvaiable || activity?.isCompleted" class="btn btn-primary btn-square">Rozpocznij lekcję</button>
                           </td>
                       </tr>
                   </tbody>

@@ -1,3 +1,148 @@
-<p>
-  quiz works!
-</p>
+<div class="page-title bgg">
+  <div class="container clearfix">
+    <div class="title-area pull-left">
+      <h2>Test sprawdzający</h2>
+    </div><!-- /.pull-right -->
+    <div class="pull-right hidden-xs">
+      <div class="bread">
+        <ol class="breadcrumb">
+          <li><a routerLinkActive="active" routerLink="/">Strona Główna</a></li>
+          <li><a routerLinkActive="active" routerLink="/dashboard">Panel Szkoleń BHP</a></li>
+          <li><a routerLinkActive="active" routerLink="/dashboard/kursy">Kursy</a></li>
+          <li><a routerLinkActive="active" [routerLink]="['/dashboard/kursy', courseId]">Kurs</a></li>
+          <li class="active">Quiz</li>
+        </ol>
+      </div><!-- end bread -->
+    </div><!-- /.pull-right -->
+  </div>
+</div><!-- end page-title -->
+
+<section class="section bgw">
+    <div class="container">
+        <div class="row">
+            <!-- quiz content -->
+            <div *ngIf="!quizCompleted" id="post-content" class="col-md-12 col-sm-12 single-course">
+                <div class="course-single-quiz">
+                    <small class="quiz-title"><span>{{quiz?.name}}</span></small><br>
+
+                    <hr>
+
+                    <div class="quiz-wrapper">
+                        <h3>Test - Pytanie {{questionIndex + 1}}</h3>
+                        <h4>{{quiz?.questions[questionIndex].questionText}}</h4>
+                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the, when an unknown printer took. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.</p> -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel course-quiz-panel">
+                                    <div class="panel-body">
+                                        <div class="checkbox checkbox-warning">
+                                            <input id="checkbox_qu_01" type="checkbox" class="styled" [checked]="answers[questionIndex]?.isFirstChecked" (change)="changeFirstCheck(questionIndex)" [disabled]="(answers[questionIndex]?.isFirstChecked || answers[questionIndex]?.isSecondChecked || answers[questionIndex]?.isThirdChecked || answers[questionIndex]?.isFourthChecked) && answers[questionIndex]?.isConfirmed">
+                                            <label for="checkbox_qu_01">
+                                                {{quiz?.questions[questionIndex].firstAnswer}}
+                                            </label>
+                                        </div>
+
+                                        <div class="checkbox checkbox-warning">
+                                            <input id="checkbox_qu_02" type="checkbox" class="styled" [checked]="answers[questionIndex]?.isSecondChecked" (change)="changeSecondCheck(questionIndex)" [disabled]="(answers[questionIndex]?.isFirstChecked || answers[questionIndex]?.isSecondChecked || answers[questionIndex]?.isThirdChecked || answers[questionIndex]?.isFourthChecked) && answers[questionIndex]?.isConfirmed">
+                                            <label for="checkbox_qu_02">
+                                                {{quiz?.questions[questionIndex].secondAnswer}}
+                                            </label>
+                                        </div>
+
+                                        <div class="checkbox checkbox-warning">
+                                            <input id="checkbox_qu_03" type="checkbox" class="styled" [checked]="answers[questionIndex]?.isThirdChecked" (change)="changeThirdCheck(questionIndex)" [disabled]="(answers[questionIndex]?.isFirstChecked || answers[questionIndex]?.isSecondChecked || answers[questionIndex]?.isThirdChecked || answers[questionIndex]?.isFourthChecked) && answers[questionIndex]?.isConfirmed">
+                                            <label for="checkbox_qu_03">
+                                                {{quiz?.questions[questionIndex].thirdAnswer}}
+                                            </label>
+                                        </div>
+
+                                        <div class="checkbox checkbox-warning">
+                                            <input id="checkbox_qu_04" type="checkbox" class="styled" [checked]="answers[questionIndex]?.isFourthChecked" (change)="changeFourthCheck(questionIndex)" [disabled]="(answers[questionIndex]?.isFirstChecked || answers[questionIndex]?.isSecondChecked || answers[questionIndex]?.isThirdChecked || answers[questionIndex]?.isFourthChecked) && answers[questionIndex]?.isConfirmed">
+                                            <label for="checkbox_qu_04">
+                                                {{quiz?.questions[questionIndex].fourthAnswer}}
+                                            </label>
+                                        </div>
+                                    </div><!-- end body -->
+                                    <div class="panel-footer text-center">
+                                        <button class="btn btn-primary" role="button" (click)="acceptQuestion(questionIndex)" [disabled]="(!answers[questionIndex]?.isFirstChecked && !answers[questionIndex]?.isSecondChecked && !answers[questionIndex]?.isThirdChecked && !answers[questionIndex]?.isFourthChecked) || answers[questionIndex]?.isConfirmed">Zatwierdź odpowiedź</button>&nbsp;
+                                        <button class="btn btn-primary" role="button" (click)="resetQuestion(questionIndex)" [disabled]="!answers[questionIndex]?.isConfirmed">Wyczyść odpowiedź</button>
+                                    </div>
+                                </div><!-- end panel -->
+
+                                <hr class="invis">
+
+                                 <div class="skills course-complete text-left">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" data-transitiongoal="progressBarValue" aria-valuenow="progressBarValue" [style.width.%]="progressBarValue"><span>{{progressBarValue | number:'1.0-0'}}</span></div>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+
+                        <hr class="invis">
+
+                        {{answers[questionIndex]?.isFirstChecked}}<br>
+                        {{answers[questionIndex]?.isSecondChecked}}<br>
+                        {{answers[questionIndex]?.isThirdChecked}}<br>
+                        {{answers[questionIndex]?.isFourthChecked}}<br>
+                        {{answers[questionIndex]?.question}}<br>
+                        {{answers[questionIndex]?.answer}}<br>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button class="btn btn-primary btn-square btn-block" (click)="setPreviousQuestion()" [disabled]="!isPrevQuestionAvaiable() || !this.answers[questionIndex]?.isConfirmed">Poprzednie pytanie</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button class="btn btn-primary btn-square btn-block" (click)="setNextQuestion()" [disabled]="!isNextQuestionAvaiable() || !this.answers[questionIndex]?.isConfirmed">Następne pytanie</button>
+                            </div>
+                        </div><!-- end row -->
+
+                        <div class="row" *ngIf="isQuizCompleted()">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary btn-square btn-block finish-btn" (click)="completeQuiz()">Zakończ test</button>
+                            </div>
+                        </div><!-- end row -->
+                    </div><!-- end quiz wrapper -->
+                </div><!-- end desc -->
+            </div><!-- end col -->  
+            
+            <!-- quiz result content -->
+            <div *ngIf="quizCompleted" id="post-content" class="col-md-12 col-sm-12 single-course">
+                <div class="course-single-quiz">
+                    <small class="quiz-title">WYNIK TESTU</small><br>
+
+                    <hr>
+
+                    <!-- Test passed -->
+                    <div *ngIf="correctAnswers >= quiz?.passCondition" class="quiz-wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success">
+                                    <strong>Gratulacje!</strong> Odpowiedziałeś/aś poprawnie na {{correctAnswers}} z {{quiz?.questionAmount}} pytań co pozwala zaliczyć ten test. Kilknij w przycisk <b>Zakończ test</b> aby zapisać swój postęp.
+                                </div>
+                                <button class="btn btn-primary btn-square btn-block finish-btn" routerLinkActive="active" [routerLink]="['/dashboard/kursy', courseId]" (click)="saveQuizProgress()">Zakończ test</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="correctAnswers < quiz?.passCondition" class="quiz-wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    <strong>Niestety!</strong> Odpowiedziałeś/aś poprawnie na {{correctAnswers}} z {{quiz?.questionAmount}} pytań co nie pozwala zaliczyć tego testu. Kilknij w przycisk <b>Powtórz test</b> aby powtórzyć test lub <b>Zakończ</b>, aby powrócić do sekcji lekcji kursu.
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button class="btn btn-primary btn-square btn-block" (click)="retryQuiz()" >Powtórz test</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button class="btn btn-primary btn-square btn-block" routerLinkActive="active" [routerLink]="['/dashboard/kursy', courseId]" (click)="endQuiz()" >Zakończ</button>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end section -->

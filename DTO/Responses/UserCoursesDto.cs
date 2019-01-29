@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DTO
+namespace DTO.Responses
 {
     public class UserCoursesDto
     {

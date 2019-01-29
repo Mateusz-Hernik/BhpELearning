@@ -59,6 +59,7 @@ namespace BhpApp
             services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 

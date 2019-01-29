@@ -8,9 +8,10 @@ import { ActivityInfo } from '../models/activity-info.interface';
 import { UserInfo } from '../models/user-info.interface';
 import { UserCourses } from '../models/user-courses.interface';
 import { UserCourse } from '../models/user-course.interface';
+import { Quiz } from '../models/quiz.interface';
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService extends BaseService {
@@ -48,6 +49,39 @@ export class DashboardService extends BaseService {
         return this._http
             .get<UserCourse>(this.baseUrl + '/dashboard/usercourse/' + userName + '/' + courseId, this.httpOptions)
             .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    getQuiz(id: number): Observable<Quiz> {
+        return this._http
+            .get<Quiz>(this.baseUrl + '/dashboard/quiz/' + id, this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    checkAnswers(questionIds: number[], answers: string[]): Observable<number> {
+        return this._http
+            .post<number>(
+                this.baseUrl + '/dashboard/checkquiz',
+                JSON.stringify({ questionIds, answers }),
+                this.httpOptions)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    completeQuiz(userName: string, courseId: number, activityId: number): Observable<boolean> {
+        return this._http
+            .post<boolean>(
+                this.baseUrl + '/dashboard/completequiz',
+                JSON.stringify({ userName, courseId, activityId }),
+                this.httpOptions)
+            .pipe(
+                map(res => {
+                    return true;
+                }),
                 catchError(this.handleError)
             );
     }

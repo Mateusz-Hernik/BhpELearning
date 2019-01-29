@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BhpApp.Controllers.Base;
 using DAL.Abstract;
-using DTO;
+using DTO.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;

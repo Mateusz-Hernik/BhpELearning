@@ -10,7 +10,7 @@ import { Token } from '../models/token.interface';
 
 // Add the RxJS Observable operators we need in this app.
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService extends BaseService {

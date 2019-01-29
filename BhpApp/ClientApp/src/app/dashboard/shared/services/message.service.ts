@@ -7,7 +7,7 @@ import { ConfigService } from 'src/app/shared/services/config.service';
 import { Message } from '../models/message.interface';
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class MessageService extends BaseService {
@@ -42,10 +42,23 @@ export class MessageService extends BaseService {
     }
 
     changeMessageReadStatus(id: number) {
-        console.log(id);
         return this._http
             .get(this.baseUrl + '/messages/changestatus/' + id, this.httpOptions)
             .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    sendCompleteTestMessage(sendFrom: string, sendTo: string, title: string, message: string) {
+        return this._http
+            .post<boolean>(
+                this.baseUrl + '/messages/sendmessage',
+                JSON.stringify({ sendFrom, sendTo, title, message }),
+                this.httpOptions)
+            .pipe(
+                map(res => {
+                    return true;
+                }),
                 catchError(this.handleError)
             );
     }

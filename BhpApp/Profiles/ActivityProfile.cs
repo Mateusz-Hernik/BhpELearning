@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DTO;
+using DTO.Responses;
 using EntityLib.Entities;
 
 namespace BhpApp.Profiles

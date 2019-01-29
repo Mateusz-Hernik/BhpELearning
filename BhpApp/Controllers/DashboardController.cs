@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using BhpApp.Controllers.Base;
 using DAL.Abstract;
-using DTO;
+using DTO.Requests;
+using DTO.Responses;
 using EntityLib.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,18 +17,21 @@ namespace BhpApp.Controllers
         private readonly IActivityRepository _activityRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IMessageRepository _messageRepository;
+        private readonly IQuestionRepository _questionRepository;
         private readonly IUserRepository _userRepository;
 
         public DashboardController(
             IActivityRepository activityRepository,
             ICourseRepository courseRepository,
             IMessageRepository messageRepository,
+            IQuestionRepository questionRepository,
             IUserRepository userRepository,
             IMapper mapper) : base(mapper)
         {
             _activityRepository = activityRepository;
             _courseRepository = courseRepository;
             _messageRepository = messageRepository;
+            _questionRepository = questionRepository;
             _userRepository = userRepository;
         }
 
@@ -36,7 +40,7 @@ namespace BhpApp.Controllers
         {
             var user = await _userRepository.GetUserAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -51,7 +55,7 @@ namespace BhpApp.Controllers
         {
             var user = await _userRepository.GetUserAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -78,18 +82,18 @@ namespace BhpApp.Controllers
 
             var userCourseDto = _mapper.Map<UserCourseDto>(await _courseRepository.GetUserCourseAsync(user.Id, id));
 
-            foreach(var activity in userCourseDto.Activities)
+            foreach (var activity in userCourseDto.Activities)
             {
                 var progress = await _activityRepository.GetActivityProgressAsync(user.Id, id, activity.Id);
 
-                if(progress != null)
+                if (progress != null)
                 {
                     activity.IsCompleted = progress.IsCompleted;
 
-                    if(prevProgress != null)
+                    if (prevProgress != null)
                     {
                         activity.IsAvaiable = prevProgress.IsCompleted && activity.StartDate <= DateTime.Now;
-                    } 
+                    }
                     else
                     {
                         activity.IsAvaiable = activity.StartDate <= DateTime.Now;
@@ -100,6 +104,63 @@ namespace BhpApp.Controllers
             }
 
             return Ok(userCourseDto);
+        }
+
+        [HttpGet("quiz/{id}")]
+        public async Task<IActionResult> GetQuiz(int id)
+        {
+            var userCourseDto = _mapper.Map<QuizDto>(await _activityRepository.GetQuizAsync(id));
+
+            return Ok(userCourseDto);
+        }
+
+        [HttpPost("checkquiz")]
+        public async Task<IActionResult> CheckQuizAnswers([FromBody]QuizAnswersDto quizAnswers)
+        {
+            try
+            {
+                var correctAnswers = 0;
+
+                for (int i = 0; i < quizAnswers.QuestionIds.Length; ++i)
+                {
+                    var question = await _questionRepository.GetQuestionAsync(quizAnswers.QuestionIds[i]);
+
+                    if (question != null)
+                    {
+                        if (quizAnswers.Answers[i].Equals(question.CorrectAnswer))
+                        {
+                            ++correctAnswers;
+                        }
+                    }
+                }
+
+                return Ok(correctAnswers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("completequiz")]
+        public async Task<IActionResult> CompleteQuiz([FromBody]CompletedQuizInfoDto quizCompleted)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserAsync(quizCompleted.UserName);
+
+                if(user != null)
+                {
+                    await _activityRepository.CompleteActivityAsync(user.Id, quizCompleted.CourseId, quizCompleted.ActivityId);
+
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -55,4 +55,4 @@ const appRoutes: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'});

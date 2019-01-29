@@ -1,4 +1,4 @@
-﻿namespace DTO
+﻿namespace DTO.Responses
 {
     public class CourseNavDto
     {

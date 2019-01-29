@@ -49,10 +49,9 @@ namespace DAL.Repositories
 
         public async Task ChangeUnreadStateAsync(int id)
         {
-            var message = await _dbContext.Messages.Where(x => x.Id.Equals(id))
-                .FirstOrDefaultAsync();
+            var message = await FindAsync(id);
 
-            if(message != null && !message.IsRead)
+            if (message != null && !message.IsRead)
             {
                 message.IsRead = true;
 
@@ -64,8 +63,7 @@ namespace DAL.Repositories
 
         public async Task DeleteMessage(int id)
         {
-            var message = await _dbContext.Messages.Where(x => x.Id.Equals(id))
-                .FirstOrDefaultAsync();
+            var message = await FindAsync(id);
 
             if (message != null)
             {
@@ -73,6 +71,12 @@ namespace DAL.Repositories
 
                 await _dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task SendMessageAsync(Message message)
+        {
+            await _dbContext.Messages.AddAsync(message);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

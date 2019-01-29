@@ -2,7 +2,9 @@
 using BhpApp.Controllers.Base;
 using BhpApp.Helpers;
 using DAL.Abstract;
-using DTO;
+using DTO.Requests;
+using DTO.Responses;
+using EntityLib.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -86,6 +88,32 @@ namespace BhpApp.Controllers
             }           
 
             return Ok();
+        }
+
+        [HttpPost("sendmessage")]
+        public async Task<IActionResult> SendMessage([FromBody]SendMessageInfoDto messageInfo)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserAsync(messageInfo.SendTo);
+
+                if(user != null)
+                {
+                    var message = _mapper.Map<Message>(messageInfo);
+
+                    message.User = user;
+
+                    await _messageRepository.SendMessageAsync(message);
+
+                    return Ok();
+                }
+
+                return BadRequest();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }
