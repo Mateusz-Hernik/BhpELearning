@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { ActivityService } from './activity.service';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 
@@ -10,13 +11,17 @@ import { UserCourses } from '../models/user-courses.interface';
 import { UserCourse } from '../models/user-course.interface';
 import { Quiz } from '../models/quiz.interface';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService extends BaseService {
 
-    constructor(private _http: HttpClient, private _configService: ConfigService) {
+    userCourse$ = new Subject<UserCourse>();
+
+    constructor(private _http: HttpClient,
+        private _activityService: ActivityService,
+        private _configService: ConfigService) {
         super();
         this.baseUrl = this._configService.getApiURI();
     }
@@ -29,10 +34,13 @@ export class DashboardService extends BaseService {
             );
     }
 
-    getActivityInfo(userName: string): Observable<ActivityInfo> {
+    getActivityInfo(userName: string) {
         return this._http
             .get<ActivityInfo>(this.baseUrl + '/dashboard/activityinfo/' + userName, this.httpOptions)
             .pipe(
+                map((res: ActivityInfo) => {
+                    this._activityService.activityInfo$.next(res);
+                }),
                 catchError(this.handleError)
             );
     }
@@ -45,10 +53,17 @@ export class DashboardService extends BaseService {
             );
     }
 
-    getUserCourse(userName: string, courseId: number): Observable<UserCourse> {
+    sendUserCourse(course: UserCourse) {
+        this.userCourse$.next(course);
+    }
+
+    getUserCourse(userName: string, courseId: number) {
         return this._http
             .get<UserCourse>(this.baseUrl + '/dashboard/usercourse/' + userName + '/' + courseId, this.httpOptions)
             .pipe(
+                map((res: UserCourse) => {
+                    this.userCourse$.next(res);
+                }),
                 catchError(this.handleError)
             );
     }

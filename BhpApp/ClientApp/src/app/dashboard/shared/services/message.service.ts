@@ -33,10 +33,13 @@ export class MessageService extends BaseService {
             );
     }
 
-    deleteMessage(id: number) {
+    deleteMessage(id: number): Observable<boolean> {
         return this._http
             .delete(this.baseUrl + '/messages/' + id, this.httpOptions)
             .pipe(
+                map(() => {
+                    return true;
+                }),
                 catchError(this.handleError)
             );
     }
@@ -56,7 +59,7 @@ export class MessageService extends BaseService {
                 JSON.stringify({ sendFrom, sendTo, title, message }),
                 this.httpOptions)
             .pipe(
-                map(res => {
+                map(() => {
                     return true;
                 }),
                 catchError(this.handleError)

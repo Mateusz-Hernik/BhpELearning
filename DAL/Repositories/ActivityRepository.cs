@@ -26,6 +26,7 @@ namespace DAL.Repositories
 
         public async Task<Progress> GetActivityProgressAsync(string userId, int courseId, int activityId)
         {
+
             return await _dbContext.Progresses
                 .Where(x => x.UserId.Equals(userId) && x.CourseId.Equals(courseId) && x.ActivityId.Equals(activityId))
                 .FirstOrDefaultAsync();
@@ -42,6 +43,8 @@ namespace DAL.Repositories
                 _dbContext.Progresses.Update(activityProgress);
 
                 await _dbContext.SaveChangesAsync();
+
+                _dbContext.Entry(activityProgress).State = EntityState.Detached;
             }
         }
     }

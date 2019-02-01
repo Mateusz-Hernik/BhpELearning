@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DashboardService } from '../shared/services/dashboard.service';
+import { MessageService } from '../shared/services/message.service';
 import { QuizService } from '../shared/services/quiz.service';
 
 import { Answer } from '../shared/models/answer.interface';
 import { Quiz } from '../shared/models/quiz.interface';
-import { MessageService } from '../shared/services/message.service';
 
 @Component({
   selector: 'app-quiz',
@@ -58,16 +58,28 @@ export class QuizComponent implements OnInit {
   saveQuizProgress() {
     this.deleteQuizDataFromLocalStorage();
     this.saveQuizIsCompleted();
-    this.sendCompleteTestMessage();
+  }
+
+  updateUserCourse() {
+    this._dashboardService.getUserCourse(localStorage.getItem('user_name'), this.courseId)
+      .subscribe();
   }
 
   saveQuizIsCompleted() {
     this._activatedRoute.params.subscribe(params => {
       this._dashboardService.completeQuiz(localStorage.getItem('user_name'), params['id'], params['id2'])
         .subscribe((res: boolean) => {
-          if (res) { console.log('Quiz completed'); }
+          if (res) {
+            this.updateUserCourse();
+            this.sendCompleteTestMessage();
+          }
         });
     });
+  }
+
+  updateActivityInfo() {
+    this._dashboardService.getActivityInfo(localStorage.getItem('user_name'))
+      .subscribe();
   }
 
   sendCompleteTestMessage() {
@@ -78,21 +90,17 @@ export class QuizComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       'Gratulujemy ukończenia testu ' + this.quiz.name + '. Twój wynik to ' + this.correctAnswers + ' punktów na ' + this.quiz.questionAmount + ' możliwych. Życzymy powodzenia w następnych lekacjach tego kursu.')
         .subscribe((res: boolean) => {
-          if (res) { console.log('Message has been sent'); }
+          if (res) {
+            this.updateActivityInfo();
+          }
         });
   }
 
   initializeAnswers() {
     this.progressBarValue = this._quizService.getProgressbarValueFromLocalStorage();
-    console.log(this.progressBarValue);
     this.questionIndex = this._quizService.getQuestionIndexFromLocalStorage();
-    console.log(this.questionIndex);
     this.answers = this._quizService.getAnswersFromLocalStorage(this.courseId);
-    console.log(this.answers);
     this.checkAnswers(this.questionIndex);
-    console.log('after loads data from localstorage');
-    console.log(this.questionIndex);
-    console.log(this.answers);
   }
 
   completeQuiz() {
@@ -102,12 +110,6 @@ export class QuizComponent implements OnInit {
       .subscribe((res: number) => {
         this.correctAnswers = res;
       });
-
-    if (this.correctAnswers >= this.quiz.passCondition) {
-      console.log('Passed');
-    } else {
-      console.log('Not passed');
-    }
   }
 
   checkAnswers(index: number) {

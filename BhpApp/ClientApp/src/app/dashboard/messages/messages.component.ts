@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DashboardService } from '../shared/services/dashboard.service';
 import { MessageService } from '../shared/services/message.service';
 
 import { Message } from '../shared/models/message.interface';
@@ -13,7 +14,8 @@ export class MessagesComponent implements OnInit {
 
   messages: Message[] = [];
 
-  constructor(private _messageService: MessageService) { }
+  constructor(private _dashboardService: DashboardService,
+    private _messageService: MessageService) { }
 
   ngOnInit() {
     this.getMessages();
@@ -30,6 +32,8 @@ export class MessagesComponent implements OnInit {
     this._messageService.deleteMessage(id)
       .subscribe(() => {
         this. messages = this.messages.filter(x => x.id !== id);
+        this._dashboardService.getActivityInfo(localStorage.getItem('user_name'))
+          .subscribe();
       });
   }
 }

@@ -40,8 +40,20 @@ namespace DAL.Repositories
                 .ToListAsync();
         }
 
+        private void ReloadTable()
+        {
+            foreach (var course in _dbContext.Set<Message>().Local.ToList())
+            {
+                _dbContext.Entry(course).State = EntityState.Detached;
+            }
+
+            _dbContext.Set<Message>().Load();
+        }
+
         public async Task<int> GetUnreadAmountAsync(string id)
         {
+            ReloadTable();
+
             return await _dbContext.Messages
                 .Where(x => x.User.Id.Equals(id) && !x.IsRead)
                 .CountAsync();
@@ -58,6 +70,8 @@ namespace DAL.Repositories
                 _dbContext.Messages.Update(message);
 
                 await _dbContext.SaveChangesAsync();
+
+                _dbContext.Entry(message).State = EntityState.Detached;
             }
         }
 
@@ -70,6 +84,8 @@ namespace DAL.Repositories
                 _dbContext.Messages.Remove(message);
 
                 await _dbContext.SaveChangesAsync();
+
+                _dbContext.Entry(message).State = EntityState.Detached;
             }
         }
 
@@ -77,6 +93,8 @@ namespace DAL.Repositories
         {
             await _dbContext.Messages.AddAsync(message);
             await _dbContext.SaveChangesAsync();
+
+            _dbContext.Entry(message).State = EntityState.Detached;
         }
     }
 }

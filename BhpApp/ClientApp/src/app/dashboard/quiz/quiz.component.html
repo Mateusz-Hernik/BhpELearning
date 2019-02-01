@@ -82,13 +82,6 @@
 
                         <hr class="invis">
 
-                        {{answers[questionIndex]?.isFirstChecked}}<br>
-                        {{answers[questionIndex]?.isSecondChecked}}<br>
-                        {{answers[questionIndex]?.isThirdChecked}}<br>
-                        {{answers[questionIndex]?.isFourthChecked}}<br>
-                        {{answers[questionIndex]?.question}}<br>
-                        {{answers[questionIndex]?.answer}}<br>
-
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <button class="btn btn-primary btn-square btn-block" (click)="setPreviousQuestion()" [disabled]="!isPrevQuestionAvaiable() || !this.answers[questionIndex]?.isConfirmed">Poprzednie pytanie</button>

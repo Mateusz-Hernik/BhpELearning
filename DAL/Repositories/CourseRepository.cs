@@ -47,8 +47,20 @@ namespace DAL.Repositories
             return course;
         }
 
+        private void ReloadTable()
+        {
+            foreach(var course in _dbContext.Set<Course>().Local.ToList())
+            {
+                _dbContext.Entry(course).State = EntityState.Detached;
+            }
+
+            _dbContext.Set<Course>().Load();
+        }
+
         public async Task<int> GetActiveCourseAmountAsync(string id)
         {
+            ReloadTable();
+
             return await _dbContext.Courses
                 .Where(x => x.UserCourses.Any(uc => uc.UserId.Equals(id) && uc.IsPaid && uc.IsActive)
                     && x.IsVisible && x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now)
